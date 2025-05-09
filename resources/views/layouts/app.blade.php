@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HMIF - Himpunan Mahasiswa Informatika</title>
-    <link rel="icon" href="{{ asset('images/LOGO-HMIF.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('images/LOGO_HMIF.png') }}" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -17,7 +17,7 @@
             <div class="flex items-center justify-between w-full md:w-auto">
                 <div class="flex items-center gap-2 md:gap-6 lg:gap-10">
                     <a href="/" class="relative">
-                        <img class="w-[62px] h-auto object-contain" src="{{ asset('images/LOGO-HMIF.png') }}"
+                        <img class="w-[62px] h-auto object-contain" src="{{ asset('images/LOGO_HMIF.png') }}"
                             alt="HMIF Logo">
                     </a>
                     <div id="desktop-menu" class="hidden md:flex flex-row gap-6 lg:gap-8 items-center">
@@ -109,7 +109,7 @@
             <div class="flex flex-col md:flex-row gap-12 md:gap-16 items-start justify-between mb-16 md:mb-20">
                 <div class="flex flex-col gap-8 items-start justify-start w-full md:w-[40%]">
                     <a href="/" class="w-[120px] md:w-[150px] lg:w-[170px] relative">
-                        <img class="w-full h-auto object-contain" src="{{ asset('images/logo-HMIF.png') }}"
+                        <img class="w-full h-auto object-contain" src="{{ asset('images/logo_HMIF.png') }}"
                             alt="HMIF Logo">
                     </a>
                     <div class="flex flex-col gap-4 items-start justify-start w-full">

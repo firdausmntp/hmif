@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard HMIF</title>
-    <link rel="icon" href="/images/LOGO-HMIF.png" type="image/png">
+    <link rel="icon" href="{{ asset('images/LOGO_HMIF.png') }}" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/user.js', 'resources/css/user.css'])
 </head>
@@ -16,7 +16,7 @@
         <header class="topbar">
             <div class="topbar-content">
                 <div class="topbar-logo">
-                    <img src="{{ asset('images/LOGO-HMIF.png') }}" alt="HMIF Logo">
+                    <img src="{{ asset('images/LOGO_HMIF.png') }}" alt="HMIF Logo">
                     <button id="menu-toggle" class="menu-toggle">
                         <i class="fas fa-bars"></i>
                     </button>

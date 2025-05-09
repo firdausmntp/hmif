@@ -264,7 +264,7 @@
     <div class="w-full bg-[#136ca9]" aria-labelledby="testimonial-heading">
         <div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-16 md:py-20 lg:py-28">
             <div class="flex flex-col gap-6 md:gap-8 items-center justify-start w-full md:w-[90%] lg:w-[768px] mx-auto">
-                <img src="{{ asset('images/logo-HMIF.png') }}" alt="HMIF Logo"
+                <img src="{{ asset('images/LOGO_HMIF.png') }}" alt="HMIF Logo"
                     class="w-[160px] md:w-[200px] lg:w-[240px] h-auto object-contain">
                 <blockquote id="testimonial-heading"
                     class="text-white text-center text-xl md:text-2xl leading-[140%] tracking-[-0.01em] font-normal">
@@ -403,7 +403,7 @@
             <div class="px-8 pt-8 pb-10">
                 <!-- Logo centered -->
                 <div class="flex justify-center mb-8">
-                    <img class="w-24 h-auto object-contain" src="{{ asset('images/LOGO-HMIF.png') }}" alt="HMIF Logo">
+                    <img class="w-24 h-auto object-contain" src="{{ asset('images/LOGO_HMIF.png') }}" alt="HMIF Logo">
                 </div>
 
                 <!-- Modal title -->
