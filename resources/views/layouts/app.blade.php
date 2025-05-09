@@ -8,6 +8,63 @@
     <link rel="icon" href="{{ asset('images/LOGO_HMIF.png') }}" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        /* Advanced hover animations for navigation links */
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: #f4efeb;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link.active::before,
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        /* Add subtle hover lift effect */
+        .nav-link:hover {
+            transform: translateY(-2px);
+            transition: transform 0.3s ease;
+        }
+
+        /* Glowing effect for buttons */
+        a.group:hover::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #136ca9, #2a2d47);
+            border-radius: 50px;
+            z-index: -2;
+            filter: blur(8px);
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Active page indicator */
+        .nav-link.active {
+            font-weight: 600;
+            position: relative;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #f4efeb;
+        }
+    </style>
 </head>
 
 <body class="min-h-screen w-full bg-gray-100">
@@ -21,25 +78,48 @@
                             alt="HMIF Logo">
                     </a>
                     <div id="desktop-menu" class="hidden md:flex flex-row gap-6 lg:gap-8 items-center">
-                        <a href="" class="nav-link text-white text-base leading-[150%] font-normal relative">
-                            Home
+                        <!-- Home Link with Fancy Hover Effect -->
+                        <a href=""
+                            class="nav-link text-white text-base leading-[150%] font-medium relative group px-2 py-1 overflow-hidden">
                             <span
-                                class="nav-highlight absolute bottom-0 left-0 w-0 h-[2px] bg-[#f4efeb] transition-all duration-300"></span>
+                                class="relative z-10 transition-colors duration-300 group-hover:text-[#2a2d47]">Home</span>
+                            <span
+                                class="nav-highlight absolute bottom-0 left-0 w-full h-[2px] bg-[#f4efeb] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"></span>
+                            <span
+                                class="absolute inset-0 bg-[#f4efeb] transform origin-top transition-transform duration-300 scale-y-0 group-hover:scale-y-100 -z-0"></span>
                         </a>
-                        <a href="#about" class="nav-link text-white text-base leading-[150%] font-normal relative">
-                            About Us
+
+                        <!-- About Us Link with Fancy Hover Effect -->
+                        <a href="#about"
+                            class="nav-link text-white text-base leading-[150%] font-medium relative group px-2 py-1 overflow-hidden">
+                            <span class="relative z-10 transition-colors duration-300 group-hover:text-[#2a2d47]">About
+                                Us</span>
                             <span
-                                class="nav-highlight absolute bottom-0 left-0 w-0 h-[2px] bg-[#f4efeb] transition-all duration-300"></span>
+                                class="nav-highlight absolute bottom-0 left-0 w-full h-[2px] bg-[#f4efeb] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"></span>
+                            <span
+                                class="absolute inset-0 bg-[#f4efeb] transform origin-top transition-transform duration-300 scale-y-0 group-hover:scale-y-100 -z-0"></span>
                         </a>
-                        <a href="#" class="nav-link text-white text-base leading-[150%] font-normal relative">
-                            Events
+
+                        <!-- Events Link with Fancy Hover Effect -->
+                        <a href="#"
+                            class="nav-link text-white text-base leading-[150%] font-medium relative group px-2 py-1 overflow-hidden">
                             <span
-                                class="nav-highlight absolute bottom-0 left-0 w-0 h-[2px] bg-[#f4efeb] transition-all duration-300"></span>
+                                class="relative z-10 transition-colors duration-300 group-hover:text-[#2a2d47]">Events</span>
+                            <span
+                                class="nav-highlight absolute bottom-0 left-0 w-full h-[2px] bg-[#f4efeb] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"></span>
+                            <span
+                                class="absolute inset-0 bg-[#f4efeb] transform origin-top transition-transform duration-300 scale-y-0 group-hover:scale-y-100 -z-0"></span>
                         </a>
-                        <a href="#" class="nav-link text-white text-base leading-[150%] font-normal relative">
-                            Forum
+
+                        <!-- Forum Link with Fancy Hover Effect -->
+                        <a href="#"
+                            class="nav-link text-white text-base leading-[150%] font-medium relative group px-2 py-1 overflow-hidden">
                             <span
-                                class="nav-highlight absolute bottom-0 left-0 w-0 h-[2px] bg-[#f4efeb] transition-all duration-300"></span>
+                                class="relative z-10 transition-colors duration-300 group-hover:text-[#2a2d47]">Forum</span>
+                            <span
+                                class="nav-highlight absolute bottom-0 left-0 w-full h-[2px] bg-[#f4efeb] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"></span>
+                            <span
+                                class="absolute inset-0 bg-[#f4efeb] transform origin-top transition-transform duration-300 scale-y-0 group-hover:scale-y-100 -z-0"></span>
                         </a>
                     </div>
                 </div>
@@ -51,48 +131,76 @@
                     </svg>
                 </button>
             </div>
+
+            <!-- Mobile Menu - Also Enhanced -->
             <div id="mobile-menu"
                 class="hidden flex-col gap-4 items-center w-full mt-4 md:hidden transition-all duration-300 ease-in-out bg-[#136ca9] rounded-lg p-4">
                 <a href=""
-                    class="w-full text-center py-2 text-white text-base leading-[150%] font-normal hover:text-[#f4efeb] hover:bg-[#2a2d47] transition-colors duration-200 rounded">
-                    Home
+                    class="w-full text-center py-2 text-white text-base leading-[150%] font-normal relative overflow-hidden group">
+                    <span class="relative z-10">Home</span>
+                    <span
+                        class="absolute inset-0 bg-[#2a2d47] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
                 </a>
                 <a href="#about"
-                    class="w-full text-center py-2 text-white text-base leading-[150%] font-normal hover:text-[#f4efeb] hover:bg-[#2a2d47] transition-colors duration-200 rounded">
-                    About Us
+                    class="w-full text-center py-2 text-white text-base leading-[150%] font-normal relative overflow-hidden group">
+                    <span class="relative z-10">About Us</span>
+                    <span
+                        class="absolute inset-0 bg-[#2a2d47] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
                 </a>
                 <a href="#"
-                    class="w-full text-center py-2 text-white text-base leading-[150%] font-normal hover:text-[#f4efeb] hover:bg-[#2a2d47] transition-colors duration-200 rounded">
-                    Events
+                    class="w-full text-center py-2 text-white text-base leading-[150%] font-normal relative overflow-hidden group">
+                    <span class="relative z-10">Events</span>
+                    <span
+                        class="absolute inset-0 bg-[#2a2d47] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
                 </a>
                 <a href="#"
-                    class="w-full text-center py-2 text-white text-base leading-[150%] font-normal hover:text-[#f4efeb] hover:bg-[#2a2d47] transition-colors duration-200 rounded">
-                    Forum
+                    class="w-full text-center py-2 text-white text-base leading-[150%] font-normal relative overflow-hidden group">
+                    <span class="relative z-10">Forum</span>
+                    <span
+                        class="absolute inset-0 bg-[#2a2d47] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
                 </a>
                 <div class="flex flex-row gap-4 items-center justify-center w-full mt-2">
                     @auth
                         <a href="{{ auth()->user()->role == 'admin' ? route('admin.dashboard') : route('dashboard') }}"
-                            class="border-[#2a2d47] flex flex-row gap-2 items-center justify-center px-5 py-2 rounded-full border-solid border-[1.5px] bg-[#f4efeb] text-[#2a2d47] text-base font-medium hover:bg-[#136ca9] focus:bg-[#136ca9] transition-colors duration-200 shadow-md">
-                            Dashboard
+                            class="relative overflow-hidden group border-[#2a2d47] flex flex-row gap-2 items-center justify-center px-5 py-2 rounded-full border-solid border-[1.5px] bg-[#f4efeb] text-[#2a2d47] text-base font-medium transition-colors duration-300 shadow-md">
+                            <span class="relative z-10">Dashboard</span>
+                            <span
+                                class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
+                            <span
+                                class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-transparent via-white to-transparent blur-sm"></span>
                         </a>
                     @else
                         <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal"
-                            class="border-[#2a2d47] flex flex-row gap-2 items-center justify-center px-5 py-2 rounded-full border-solid border-[1.5px] bg-[#f4efeb] text-[#2a2d47] text-base font-medium hover:bg-[#136ca9] focus:bg-[#136ca9] transition-colors duration-200 shadow-md">
-                            Login
+                            class="relative overflow-hidden group border-[#2a2d47] flex flex-row gap-2 items-center justify-center px-5 py-2 rounded-full border-solid border-[1.5px] bg-[#f4efeb] text-[#2a2d47] text-base font-medium transition-colors duration-300 shadow-md">
+                            <span class="relative z-10 group-hover:text-white">Login</span>
+                            <span
+                                class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
+                            <span
+                                class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-transparent via-white to-transparent blur-sm"></span>
                         </a>
                     @endauth
                 </div>
             </div>
+
+            <!-- Login Button with Advanced Hover Effect -->
             <div class="hidden md:flex flex-row gap-4 items-center">
                 @auth
                     <a href="{{ auth()->user()->role == 'admin' ? route('admin.dashboard') : route('dashboard') }}"
-                        class="border-[#2a2d47] flex flex-row gap-2 items-center justify-center px-5 py-2 rounded-full border-solid border-[1.5px] bg-[#f4efeb] text-[#2a2d47] text-base font-medium hover:bg-[#136ca9] focus:bg-[#136ca9] transition-colors duration-200 shadow-md">
-                        Dashboard
+                        class="relative overflow-hidden group flex items-center justify-center px-5 py-2 rounded-full border-solid border-[1.5px] border-[#2a2d47] bg-[#f4efeb] text-[#2a2d47] text-base font-medium transition-all duration-300 shadow-md">
+                        <span class="relative z-10 group-hover:text-white transition-colors duration-300">Dashboard</span>
+                        <span
+                            class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"></span>
+                        <span
+                            class="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-gradient-to-r from-transparent via-white to-transparent blur-sm"></span>
                     </a>
                 @else
                     <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal"
-                        class="border-[#2a2d47] flex flex-row gap-2 items-center justify-center px-5 py-2 rounded-full border-solid border-[1.5px] bg-[#f4efeb] text-[#2a2d47] text-base font-medium hover:bg-[#136ca9] focus:bg-[#136ca9] transition-colors duration-200 shadow-md">
-                        Login
+                        class="relative overflow-hidden group flex items-center justify-center px-5 py-2 rounded-full border-solid border-[1.5px] border-[#2a2d47] bg-[#f4efeb] text-[#2a2d47] text-base font-medium transition-all duration-300 shadow-md hover:border-[#136ca9]">
+                        <span class="relative z-10 group-hover:text-white transition-colors duration-300">Login</span>
+                        <span
+                            class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"></span>
+                        <span
+                            class="absolute -inset-x-2 -inset-y-2 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-gradient-to-r from-transparent via-white to-transparent blur-sm"></span>
                     </a>
                 @endauth
             </div>

@@ -1,5 +1,41 @@
 @extends('layouts.app')
 
+@section('style')
+    <style>
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fade-in-up 0.6s ease-out forwards;
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.8s ease-out forwards;
+            animation-delay: 0.2s;
+            opacity: 0;
+        }
+    </style>
+@endsection
+
 @section('content')
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -8,32 +44,54 @@
         </div>
     @endif
     <div class="w-full relative" aria-labelledby="welcome-heading">
-        <div class="w-full h-[500px] md:h-[700px] lg:h-[900px] relative overflow-hidden">
+        <div class="w-full h-[300px] md:h-[500px] lg:h-[700px] relative overflow-hidden">
             <img src="{{ asset('images/fotohmif.jpg') }}" alt="HMIF Background"
-                class="w-full h-full object-cover object-center">
+                class="w-full h-full object-cover object-center transform scale-105 transition duration-700 hover:scale-100">
         </div>
-        <div class="absolute inset-0 flex items-center">
+        <div class="absolute inset-0 flex items-center bg-gradient-to-b from-black/70 to-black/70">
             <div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 w-full">
                 <div class="flex flex-col gap-6 md:gap-8 items-start justify-center w-full md:w-[60%] lg:w-[560px]">
                     <div class="flex flex-col gap-4 md:gap-6 items-start justify-start w-full">
-                        <h1 id="welcome-heading"
-                            class="text-white text-4xl md:text-5xl lg:text-[56px] leading-[120%] tracking-[-0.01em] font-normal">
-                            Welcome to HMIF
-                        </h1>
-                        <p class="text-white text-base md:text-lg leading-[150%] font-normal">
-                            Himpunan Mahasiswa Informatika (HMIF) is a student organization that brings together students
-                            from the Informatics study program. We organize various activities to enhance knowledge, skills,
+                        <div class="overflow-hidden">
+                            <h1 id="welcome-heading"
+                                class="text-white text-4xl md:text-5xl lg:text-[60px] leading-[1.1] tracking-tight font-bold animate-fade-in-up"
+                                style="text-shadow: 0px 2px 4px rgba(0,0,0,0.3); letter-spacing: -0.02em;">
+                                Welcome to <span
+                                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-blue-500">HMIF</span>
+                            </h1>
+                        </div>
+                        <p class="text-white text-base md:text-lg lg:text-xl leading-[1.7] font-normal max-w-xl animate-fade-in bg-black/30 p-4 md:p-5 rounded-lg border-l-4 border-blue-300 shadow-lg"
+                            style="text-shadow: 0px 1px 3px rgba(0,0,0,0.3); letter-spacing: 0.01em;">
+                            <span class="text-blue-200 font-medium">Himpunan Mahasiswa Informatika (HMIF)</span> is a
+                            student organization that brings together students
+                            from the Informatics study program. We organize <span class="text-gray-200 italic">various
+                                activities</span> to enhance knowledge, skills,
                             and networking opportunities.
                         </p>
                     </div>
-                    <div class="flex flex-row gap-4 items-start">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal"
-                            class="flex flex-row gap-2 items-center justify-center px-4 md:px-6 py-2 md:py-2.5 rounded-full border-solid border-[1.5px] border-[#2a2d47] bg-[#f4efeb] text-[#2a2d47] text-sm md:text-base font-medium hover:bg-[#136ca9] focus:bg-[#136ca9] transition-colors duration-200 shadow-md">
-                            Join Us
-                        </a>
+                    <div class="flex flex-row gap-4 items-start animate-fade-in-up" style="animation-delay: 0.3s;">
+                        @guest
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal"
+                                class="group relative overflow-hidden flex flex-row gap-2 items-center justify-center px-5 md:px-7 py-2.5 md:py-3 rounded-full border-solid border-2 border-[#f4efeb] bg-[#f4efeb] text-[#2a2d47] text-sm md:text-base font-semibold hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl">
+                                <span class="relative z-10">Join Us</span>
+                                <span
+                                    class="absolute inset-0 bg-gradient-to-r from-[#136ca9] to-[#0a4c7a] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                            </a>
+                        @else
+                            <a href="{{ route('dashboard') }}"
+                                class="group relative overflow-hidden flex flex-row gap-2 items-center justify-center px-5 md:px-7 py-2.5 md:py-3 rounded-full border-solid border-2 border-[#f4efeb] bg-[#f4efeb] text-[#2a2d47] text-sm md:text-base font-semibold hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl">
+                                <span class="relative z-10">Go to Dashboard</span>
+                                <span
+                                    class="absolute inset-0 bg-gradient-to-r from-[#136ca9] to-[#0a4c7a] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                            </a>
+                        @endguest
                         <a href="#about"
-                            class="flex flex-row gap-2 items-center justify-center px-4 md:px-6 py-2 md:py-2.5 rounded-full border-solid border-[1.5px] border-[#2a2d47] bg-[#2a2d47] text-white text-sm md:text-base font-medium hover:bg-[#136ca9] focus:bg-[#136ca9] transition-colors duration-200 shadow-md">
-                            Learn More
+                            class="group relative overflow-hidden flex flex-row gap-2 items-center justify-center px-5 md:px-7 py-2.5 md:py-3 rounded-full border-solid border-2 border-white bg-transparent backdrop-blur-sm text-white text-sm md:text-base font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
+                            <span class="relative z-10 group-hover:text-[#2a2d47] transition-colors duration-300">Learn
+                                More</span>
+                            <span
+                                class="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                            <span class="absolute top-0 left-0 w-full h-full bg-[#2a2d47] rounded-full z-0"></span>
                         </a>
                     </div>
                 </div>
