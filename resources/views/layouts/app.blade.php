@@ -68,7 +68,7 @@
 </head>
 
 <body class="min-h-screen w-full bg-gray-100">
-    <nav class="w-full bg-[#2a2d47] shadow-lg" aria-label="Main navigation">
+    <nav class="w-full bg-[#3a6186] shadow-lg" aria-label="Main navigation">
         <div
             class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-4 md:px-8 lg:px-16 py-4 md:h-[72px]">
             <div class="flex items-center justify-between w-full md:w-auto">
@@ -79,7 +79,7 @@
                     </a>
                     <div id="desktop-menu" class="hidden md:flex flex-row gap-6 lg:gap-8 items-center">
                         <!-- Home Link with Fancy Hover Effect -->
-                        <a href=""
+                        <a href="{{ route('home') }}"
                             class="nav-link text-white text-base leading-[150%] font-medium relative group px-2 py-1 overflow-hidden">
                             <span
                                 class="relative z-10 transition-colors duration-300 group-hover:text-[#2a2d47]">Home</span>
@@ -90,15 +90,37 @@
                         </a>
 
                         <!-- About Us Link with Fancy Hover Effect -->
-                        <a href="#about"
-                            class="nav-link text-white text-base leading-[150%] font-medium relative group px-2 py-1 overflow-hidden">
-                            <span class="relative z-10 transition-colors duration-300 group-hover:text-[#2a2d47]">About
-                                Us</span>
-                            <span
-                                class="nav-highlight absolute bottom-0 left-0 w-full h-[2px] bg-[#f4efeb] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"></span>
-                            <span
-                                class="absolute inset-0 bg-[#f4efeb] transform origin-top transition-transform duration-300 scale-y-0 group-hover:scale-y-100 -z-0"></span>
-                        </a>
+                        <div class="relative inline-block text-left" id="about-dropdown">
+                            <div>
+                                <button type="button" 
+                                        class="nav-link text-white text-base leading-[150%] font-medium relative group px-2 py-1 overflow-hidden flex items-center gap-x-1"
+                                        id="about-menu-button" 
+                                        aria-expanded="false" 
+                                        aria-haspopup="true">
+                                    <span class="relative z-10 transition-colors duration-300 group-hover:text-[#2a2d47]">About</span>
+                                    <svg class="w-4 h-4 text-white group-hover:text-[#2a2d47] transition-colors duration-300" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="nav-highlight absolute bottom-0 left-0 w-full h-[2px] bg-[#f4efeb] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"></span>
+                                    <span class="absolute inset-0 bg-[#f4efeb] transform origin-top transition-transform duration-300 scale-y-0 group-hover:scale-y-100 -z-0"></span>
+                                </button>
+                            </div>
+
+                            <!-- Dropdown menu -->
+                            <div class="hidden absolute z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none" 
+                                 role="menu" 
+                                 aria-orientation="vertical" 
+                                 aria-labelledby="about-menu-button" 
+                                 tabindex="-1"
+                                 id="about-dropdown-menu">
+                                <div class="py-1" role="none">
+                                    <a href="{{ route('about') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1">About Us</a>
+                                    <a href="{{ route('team') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1">Our Team</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1">History</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1">Vision & Mission</a>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Events Link with Fancy Hover Effect -->
                         <a href="#"
@@ -141,12 +163,36 @@
                     <span
                         class="absolute inset-0 bg-[#2a2d47] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
                 </a>
-                <a href="#about"
-                    class="w-full text-center py-2 text-white text-base leading-[150%] font-normal relative overflow-hidden group">
-                    <span class="relative z-10">About Us</span>
-                    <span
-                        class="absolute inset-0 bg-[#2a2d47] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
-                </a>
+                <div class="w-full relative" id="mobile-about-dropdown">
+                    <button
+                        class="w-full text-center py-2 text-white text-base leading-[150%] font-normal relative overflow-hidden group flex items-center justify-center gap-1"
+                        id="mobile-about-button">
+                        <span class="relative z-10">About Us</span>
+                        <svg class="w-4 h-4 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                        </svg>
+                        <span
+                            class="absolute inset-0 bg-[#2a2d47] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
+                    </button>
+                    <div class="hidden bg-[#2a2d47] w-full" id="mobile-about-dropdown-menu">
+                        <a href="{{ route('about') }}"
+                            class="w-full text-center py-2 text-white text-sm leading-[150%] font-normal relative overflow-hidden group flex justify-center">
+                            <span class="relative z-10">About Us</span>
+                        </a>
+                        <a href="#"
+                            class="w-full text-center py-2 text-white text-sm leading-[150%] font-normal relative overflow-hidden group flex justify-center">
+                            <span class="relative z-10">Our Team</span>
+                        </a>
+                        <a href="#"
+                            class="w-full text-center py-2 text-white text-sm leading-[150%] font-normal relative overflow-hidden group flex justify-center">
+                            <span class="relative z-10">History</span>
+                        </a>
+                        <a href="#"
+                            class="w-full text-center py-2 text-white text-sm leading-[150%] font-normal relative overflow-hidden group flex justify-center">
+                            <span class="relative z-10">Vision & Mission</span>
+                        </a>
+                    </div>
+                </div>
                 <a href="#"
                     class="w-full text-center py-2 text-white text-base leading-[150%] font-normal relative overflow-hidden group">
                     <span class="relative z-10">Events</span>
@@ -253,13 +299,17 @@
                         <h3 class="text-[#f4efeb] text-sm font-semibold">Navigation</h3>
                         <a href=""
                             class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200">Home</a>
-                        <a href="#"
+                        <a href="{{ route('about') }}"
                             class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200">About
                             Us</a>
                         <a href="#"
-                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200">Events</a>
+                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 ml-4">Our Team</a>
                         <a href="#"
-                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200">Forum</a>
+                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 ml-4">History</a>
+                        <a href="#"
+                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 ml-4">Vision & Mission</a>
+                        <a href="#"
+                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200">Events</a>
                     </div>
                     <div class="flex flex-col gap-4 items-start justify-start">
                         <h3 class="text-[#f4efeb] text-sm font-semibold">Connect</h3>
@@ -318,6 +368,49 @@
                 mobileMenu.classList.toggle('flex', !isExpanded);
                 mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
             });
+
+            // About dropdown functionality
+            const aboutButton = document.getElementById('about-menu-button');
+            const aboutDropdownMenu = document.getElementById('about-dropdown-menu');
+            
+            if (aboutButton && aboutDropdownMenu) {
+                // Toggle dropdown when button is clicked
+                aboutButton.addEventListener('click', function() {
+                    const isExpanded = aboutDropdownMenu.classList.contains('hidden');
+                    
+                    // Toggle the dropdown visibility
+                    aboutDropdownMenu.classList.toggle('hidden', !isExpanded);
+                    
+                    // Add animation classes
+                    if (isExpanded) {
+                        aboutDropdownMenu.classList.add('transition', 'ease-out', 'duration-100', 'transform', 'opacity-100', 'scale-100');
+                        aboutDropdownMenu.classList.remove('opacity-0', 'scale-95');
+                    } else {
+                        aboutDropdownMenu.classList.add('transition', 'ease-in', 'duration-75', 'transform', 'opacity-0', 'scale-95');
+                        aboutDropdownMenu.classList.remove('opacity-100', 'scale-100');
+                    }
+                    
+                    aboutButton.setAttribute('aria-expanded', isExpanded);
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!aboutButton.contains(event.target) && !aboutDropdownMenu.contains(event.target)) {
+                        aboutDropdownMenu.classList.add('hidden');
+                        aboutButton.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+
+            // Mobile About dropdown functionality
+            const mobileAboutButton = document.getElementById('mobile-about-button');
+            const mobileAboutDropdownMenu = document.getElementById('mobile-about-dropdown-menu');
+            
+            if (mobileAboutButton && mobileAboutDropdownMenu) {
+                mobileAboutButton.addEventListener('click', function() {
+                    mobileAboutDropdownMenu.classList.toggle('hidden');
+                });
+            }
 
             // Tambahkan kode untuk menangani modal login
             const loginModal = document.getElementById('loginModal');
