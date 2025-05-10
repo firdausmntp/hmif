@@ -44,10 +44,10 @@
         </div>
     @endif
     <div class="w-full relative" aria-labelledby="welcome-heading">
-        <div class="w-full h-[300px] md:h-[500px] lg:h-[700px] relative overflow-hidden">
-            <img src="{{ asset('images/fotohmif.jpg') }}" alt="HMIF Background"
-                class="w-full h-full object-cover object-center transform scale-105 transition duration-700 hover:scale-100">
-        </div>
+    <div class="w-full h-[500px] md:h-[500px] lg:h-[1000px] relative overflow-hidden bg-center"
+     style="background-image: url('{{ asset('images/fotohmif.jpg') }}'); background-size: contain;">
+    </div>
+
         <div class="absolute inset-0 flex items-center bg-gradient-to-b from-black/70 to-black/70">
             <div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 w-full">
                 <div class="flex flex-col gap-6 md:gap-8 items-start justify-center w-full md:w-[60%] lg:w-[560px]">

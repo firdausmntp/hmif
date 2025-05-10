@@ -46,3 +46,11 @@ Route::get('/dashboard', function () {
 })->middleware('auth')->name('dashboard');
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+Route::get('/team', function () {
+    return view('team');
+})->name('team');
