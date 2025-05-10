@@ -76,7 +76,9 @@
                     <a href="/" class="relative">
                         <img class="w-[62px] h-auto object-contain" src="{{ asset('images/LOGO_HMIF.png') }}"
                             alt="HMIF Logo">
+
                     </a>
+                    <span class="ml-2 text-white font-bold text-xxl md:hidden">HMIF</span>
                     <div id="desktop-menu" class="hidden md:flex flex-row gap-6 lg:gap-8 items-center">
                         <!-- Home Link with Fancy Hover Effect -->
                         <a href="{{ route('home') }}"
@@ -92,32 +94,37 @@
                         <!-- About Us Link with Fancy Hover Effect -->
                         <div class="relative inline-block text-left" id="about-dropdown">
                             <div>
-                                <button type="button" 
-                                        class="nav-link text-white text-base leading-[150%] font-medium relative group px-2 py-1 overflow-hidden flex items-center gap-x-1"
-                                        id="about-menu-button" 
-                                        aria-expanded="false" 
-                                        aria-haspopup="true">
-                                    <span class="relative z-10 transition-colors duration-300 group-hover:text-[#2a2d47]">About</span>
-                                    <svg class="w-4 h-4 text-white group-hover:text-[#2a2d47] transition-colors duration-300" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                                <button type="button"
+                                    class="nav-link text-white text-base leading-[150%] font-medium relative group px-2 py-1 overflow-hidden flex items-center gap-x-1"
+                                    id="about-menu-button" aria-expanded="false" aria-haspopup="true">
+                                    <span
+                                        class="relative z-10 transition-colors duration-300 group-hover:text-[#2a2d47]">About</span>
+                                    <svg class="w-4 h-4 text-white group-hover:text-[#2a2d47] transition-colors duration-300"
+                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                                            clip-rule="evenodd" />
                                     </svg>
-                                    <span class="nav-highlight absolute bottom-0 left-0 w-full h-[2px] bg-[#f4efeb] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"></span>
-                                    <span class="absolute inset-0 bg-[#f4efeb] transform origin-top transition-transform duration-300 scale-y-0 group-hover:scale-y-100 -z-0"></span>
+                                    <span
+                                        class="nav-highlight absolute bottom-0 left-0 w-full h-[2px] bg-[#f4efeb] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"></span>
+                                    <span
+                                        class="absolute inset-0 bg-[#f4efeb] transform origin-top transition-transform duration-300 scale-y-0 group-hover:scale-y-100 -z-0"></span>
                                 </button>
                             </div>
 
                             <!-- Dropdown menu -->
-                            <div class="hidden absolute z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none" 
-                                 role="menu" 
-                                 aria-orientation="vertical" 
-                                 aria-labelledby="about-menu-button" 
-                                 tabindex="-1"
-                                 id="about-dropdown-menu">
+                            <div class="hidden absolute z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
+                                role="menu" aria-orientation="vertical" aria-labelledby="about-menu-button"
+                                tabindex="-1" id="about-dropdown-menu">
                                 <div class="py-1" role="none">
-                                    <a href="{{ route('about') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1">About Us</a>
-                                    <a href="{{ route('team') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1">Our Team</a>
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1">History</a>
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1">Vision & Mission</a>
+
+                                    <a href="{{ route('team') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem"
+                                        tabindex="-1">Our Team</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                        role="menuitem" tabindex="-1">History</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                        role="menuitem" tabindex="-1">Vision & Mission</a>
                                 </div>
                             </div>
                         </div>
@@ -145,90 +152,131 @@
                         </a>
                     </div>
                 </div>
-                <button id="mobile-menu-button" class="md:hidden focus:outline-none" aria-label="Toggle mobile menu"
-                    aria-expanded="false">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
+                <button id="mobile-menu-button"
+                    class="md:hidden focus:outline-none group bg-[#2a4d69] p-2 rounded-md transition-all duration-300 hover:bg-[#203d54]"
+                    aria-label="Toggle mobile menu" aria-expanded="false">
+                    <div class="w-6 h-5 flex flex-col justify-between relative">
+                        <span
+                            class="w-6 h-0.5 bg-white rounded transform transition-transform duration-300 origin-right"
+                            id="burger-top"></span>
+                        <span class="w-6 h-0.5 bg-white rounded transition-opacity duration-300"
+                            id="burger-middle"></span>
+                        <span
+                            class="w-6 h-0.5 bg-white rounded transform transition-transform duration-300 origin-right"
+                            id="burger-bottom"></span>
+                    </div>
                 </button>
             </div>
 
-            <!-- Mobile Menu - Also Enhanced -->
+            <!-- Mobile Menu - Enhanced with Hover Effects and Consistent Div Structure -->
             <div id="mobile-menu"
-                class="hidden flex-col gap-4 items-center w-full mt-4 md:hidden transition-all duration-300 ease-in-out bg-[#136ca9] rounded-lg p-4">
-                <a href=""
-                    class="w-full text-center py-2 text-white text-base leading-[150%] font-normal relative overflow-hidden group">
-                    <span class="relative z-10">Home</span>
-                    <span
-                        class="absolute inset-0 bg-[#2a2d47] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
-                </a>
-                <div class="w-full relative" id="mobile-about-dropdown">
-                    <button
-                        class="w-full text-center py-2 text-white text-base leading-[150%] font-normal relative overflow-hidden group flex items-center justify-center gap-1"
-                        id="mobile-about-button">
-                        <span class="relative z-10">About Us</span>
-                        <svg class="w-4 h-4 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-                        </svg>
-                        <span
-                            class="absolute inset-0 bg-[#2a2d47] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
-                    </button>
-                    <div class="hidden bg-[#2a2d47] w-full" id="mobile-about-dropdown-menu">
-                        <a href="{{ route('about') }}"
-                            class="w-full text-center py-2 text-white text-sm leading-[150%] font-normal relative overflow-hidden group flex justify-center">
-                            <span class="relative z-10">About Us</span>
-                        </a>
-                        <a href="#"
-                            class="w-full text-center py-2 text-white text-sm leading-[150%] font-normal relative overflow-hidden group flex justify-center">
-                            <span class="relative z-10">Our Team</span>
-                        </a>
-                        <a href="#"
-                            class="w-full text-center py-2 text-white text-sm leading-[150%] font-normal relative overflow-hidden group flex justify-center">
-                            <span class="relative z-10">History</span>
-                        </a>
-                        <a href="#"
-                            class="w-full text-center py-2 text-white text-sm leading-[150%] font-normal relative overflow-hidden group flex justify-center">
-                            <span class="relative z-10">Vision & Mission</span>
-                        </a>
+                class="hidden flex-col gap-4 items-center w-full mt-4 md:hidden transition-all duration-300 ease-in-out overflow-hidden shadow-lg rounded-xl border border-[#2a4d69]/20">
+                <div class="w-full bg-gradient-to-b from-[#3a6186] to-[#2a4d69] backdrop-blur-md p-6 pt-4">
+                    <!-- Home -->
+                    <div class="w-full relative mt-2" id="mobile-home-dropdown">
+                        <button
+                            class="w-full text-left py-3 px-4 text-white text-base leading-[150%] font-normal relative overflow-hidden group flex items-center gap-2 rounded-lg border-solid border-[1.5px] border-transparent transition-all duration-300"
+                            id="mobile-home-button">
+                            <span class="relative z-10 group-hover:text-white">Home</span>
+                            <span
+                                class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
+                        </button>
+                        <div class="hidden bg-[#1e3c55] w-full rounded-lg overflow-hidden shadow-inner mt-1"
+                            id="mobile-home-dropdown-menu">
+                            <!-- Kosong untuk saat ini, bisa ditambahkan sub-menu jika perlu -->
+                        </div>
                     </div>
-                </div>
-                <a href="#"
-                    class="w-full text-center py-2 text-white text-base leading-[150%] font-normal relative overflow-hidden group">
-                    <span class="relative z-10">Events</span>
-                    <span
-                        class="absolute inset-0 bg-[#2a2d47] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
-                </a>
-                <a href="#"
-                    class="w-full text-center py-2 text-white text-base leading-[150%] font-normal relative overflow-hidden group">
-                    <span class="relative z-10">Forum</span>
-                    <span
-                        class="absolute inset-0 bg-[#2a2d47] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
-                </a>
-                <div class="flex flex-row gap-4 items-center justify-center w-full mt-2">
-                    @auth
-                        <a href="{{ auth()->user()->role == 'admin' ? route('admin.dashboard') : route('dashboard') }}"
-                            class="relative overflow-hidden group border-[#2a2d47] flex flex-row gap-2 items-center justify-center px-5 py-2 rounded-full border-solid border-[1.5px] bg-[#f4efeb] text-[#2a2d47] text-base font-medium transition-colors duration-300 shadow-md">
-                            <span class="relative z-10">Dashboard</span>
+
+                    <!-- About Dropdown -->
+                    <div class="w-full relative mt-2" id="mobile-about-dropdown">
+                        <button
+                            class="w-full py-3 px-4 text-white text-base leading-[150%] font-normal relative overflow-hidden group flex items-center gap-1 rounded-lg hover:bg-white/10 transition-all duration-300"
+                            id="mobile-about-button">
+                            <span class="relative z-10">About</span>
+                            <svg class="w-4 h-4 text-white transition-transform duration-300" viewBox="0 0 20 20"
+                                fill="currentColor" aria-hidden="true" id="about-dropdown-icon">
+                                <path fill-rule="evenodd"
+                                    d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                                    clip-rule="evenodd" />
+                            </svg>
                             <span
                                 class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
-                            <span
-                                class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-transparent via-white to-transparent blur-sm"></span>
-                        </a>
-                    @else
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal"
-                            class="relative overflow-hidden group border-[#2a2d47] flex flex-row gap-2 items-center justify-center px-5 py-2 rounded-full border-solid border-[1.5px] bg-[#f4efeb] text-[#2a2d47] text-base font-medium transition-colors duration-300 shadow-md">
-                            <span class="relative z-10 group-hover:text-white">Login</span>
+                        </button>
+                        <div class="hidden bg-[#1e3c55] w-full rounded-lg overflow-hidden shadow-inner mt-1"
+                            id="mobile-about-dropdown-menu">
+                            <a href="{{ route('team') }}"
+                                class="w-full text- py-3 px-4 text-white text-sm leading-[150%] font-normal relative overflow-hidden group flex hover:bg-white/10 transition-colors duration-300">
+                                <span class="relative z-10">Our Team</span>
+                                <span
+                                    class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
+                            </a>
+                            <a href="#"
+                                class="w-full text- py-3 px-4 text-white text-sm leading-[150%] font-normal relative overflow-hidden group flex hover:bg-white/10 transition-colors duration-300">
+                                <span class="relative z-10">History</span>
+                                <span
+                                    class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
+                            </a>
+                            <a href="#"
+                                class="w-full text- py-3 px-4 text-white text-sm leading-[150%] font-normal relative overflow-hidden group flex hover:bg-white/10 transition-colors duration-300">
+                                <span class="relative z-10">Vision & Mission</span>
+                                <span
+                                    class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Events -->
+                    <div class="w-full relative mt-2" id="mobile-forum-dropdown">
+                        <button
+                            class="w-full text-left py-3 px-4 text-white text-base leading-[150%] font-normal relative overflow-hidden group flex items-center gap-2 rounded-lg border-solid border-[1.5px] border-transparent transition-all duration-300"
+                            id="mobile-forum-button">
+                            <span class="relative z-10 group-hover:text-white">Events</span>
                             <span
                                 class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
+                        </button>
+                        <div class="hidden bg-[#1e3c55] w-full rounded-lg overflow-hidden shadow-inner mt-1"
+                            id="mobile-forum-dropdown-menu">
+                            <!-- Kosong untuk saat ini, bisa ditambahkan sub-menu jika perlu -->
+                        </div>
+                    </div>
+
+                    <!-- Forum -->
+                    <div class="w-full relative mt-2" id="mobile-forum-dropdown">
+                        <button
+                            class="w-full text-left py-3 px-4 text-white text-base leading-[150%] font-normal relative overflow-hidden group flex items-center gap-2 rounded-lg border-solid border-[1.5px] border-transparent transition-all duration-300"
+                            id="mobile-forum-button">
+                            <span class="relative z-10 group-hover:text-white">Forum</span>
                             <span
-                                class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-transparent via-white to-transparent blur-sm"></span>
-                        </a>
-                    @endauth
+                                class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
+                        </button>
+                        <div class="hidden bg-[#1e3c55] w-full rounded-lg overflow-hidden shadow-inner mt-1"
+                            id="mobile-forum-dropdown-menu">
+                            <!-- Kosong untuk saat ini, bisa ditambahkan sub-menu jika perlu -->
+                        </div>
+                    </div>
+
+                    <!-- Login Button -->
+                    <div class="flex flex-row gap-4 items-center justify-center w-full mt-6 mb-2">
+                        @auth
+                            <a href="{{ auth()->user()->role == 'admin' ? route('admin.dashboard') : route('dashboard') }}"
+                                class="relative overflow-hidden group border-[#2a2d47] flex flex-row gap-2 items-center justify-center px-5 py-2.5 rounded-full border-solid border-[1.5px] bg-[#f4efeb] text-[#2a2d47] text-base font-medium transition-colors duration-300 shadow-md w-full">
+                                <span class="relative z-10 group-hover:text-white">Dashboard</span>
+                                <span
+                                    class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
+                            </a>
+                        @else
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal"
+                                class="relative overflow-hidden group border-[#2a2d47] flex flex-row gap-2 items-center justify-center px-5 py-2.5 rounded-full border-solid border-[1.5px] bg-[#f4efeb] text-[#2a2d47] text-base font-medium transition-colors duration-300 shadow-md w-full">
+                                <span class="relative z-10 group-hover:text-white">Login</span>
+                                <span
+                                    class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
+                            </a>
+                        @endauth
+                    </div>
                 </div>
             </div>
 
-            <!-- Login Button with Advanced Hover Effect -->
+            <!-- Login Button with Advanced Hover Effect (Desktop) -->
             <div class="hidden md:flex flex-row gap-4 items-center">
                 @auth
                     <a href="{{ auth()->user()->role == 'admin' ? route('admin.dashboard') : route('dashboard') }}"
@@ -250,7 +298,6 @@
                     </a>
                 @endauth
             </div>
-        </div>
     </nav>
 
     <main class="w-full">
@@ -303,11 +350,13 @@
                             class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200">About
                             Us</a>
                         <a href="#"
-                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 ml-4">Our Team</a>
+                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 ml-4">Our
+                            Team</a>
                         <a href="#"
                             class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 ml-4">History</a>
                         <a href="#"
-                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 ml-4">Vision & Mission</a>
+                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 ml-4">Vision
+                            & Mission</a>
                         <a href="#"
                             class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200">Events</a>
                     </div>
@@ -372,27 +421,29 @@
             // About dropdown functionality
             const aboutButton = document.getElementById('about-menu-button');
             const aboutDropdownMenu = document.getElementById('about-dropdown-menu');
-            
+
             if (aboutButton && aboutDropdownMenu) {
                 // Toggle dropdown when button is clicked
                 aboutButton.addEventListener('click', function() {
                     const isExpanded = aboutDropdownMenu.classList.contains('hidden');
-                    
+
                     // Toggle the dropdown visibility
                     aboutDropdownMenu.classList.toggle('hidden', !isExpanded);
-                    
+
                     // Add animation classes
                     if (isExpanded) {
-                        aboutDropdownMenu.classList.add('transition', 'ease-out', 'duration-100', 'transform', 'opacity-100', 'scale-100');
+                        aboutDropdownMenu.classList.add('transition', 'ease-out', 'duration-100',
+                            'transform', 'opacity-100', 'scale-100');
                         aboutDropdownMenu.classList.remove('opacity-0', 'scale-95');
                     } else {
-                        aboutDropdownMenu.classList.add('transition', 'ease-in', 'duration-75', 'transform', 'opacity-0', 'scale-95');
+                        aboutDropdownMenu.classList.add('transition', 'ease-in', 'duration-75', 'transform',
+                            'opacity-0', 'scale-95');
                         aboutDropdownMenu.classList.remove('opacity-100', 'scale-100');
                     }
-                    
+
                     aboutButton.setAttribute('aria-expanded', isExpanded);
                 });
-                
+
                 // Close dropdown when clicking outside
                 document.addEventListener('click', function(event) {
                     if (!aboutButton.contains(event.target) && !aboutDropdownMenu.contains(event.target)) {
@@ -405,7 +456,7 @@
             // Mobile About dropdown functionality
             const mobileAboutButton = document.getElementById('mobile-about-button');
             const mobileAboutDropdownMenu = document.getElementById('mobile-about-dropdown-menu');
-            
+
             if (mobileAboutButton && mobileAboutDropdownMenu) {
                 mobileAboutButton.addEventListener('click', function() {
                     mobileAboutDropdownMenu.classList.toggle('hidden');
