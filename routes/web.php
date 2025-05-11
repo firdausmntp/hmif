@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\Admin\UserController;
 
 // Rute home dengan logic untuk menampilkan modal login
 Route::get('/', function () {
@@ -24,6 +25,7 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('admin.dashboard');
     Route::post('/change-password', [DashboardController::class, 'changePassword'])->middleware('auth')->name('admin.change-password');
+    Route::resource('users', UserController::class)->middleware('auth')->names('admin.users');
 });
 
 // Rute user

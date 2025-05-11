@@ -64,11 +64,25 @@
             height: 2px;
             background-color: #f4efeb;
         }
+
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
     </style>
 </head>
 
 <body class="min-h-screen w-full bg-gray-100">
-    <nav class="w-full bg-[#3a6186] shadow-lg" aria-label="Main navigation">
+    <nav class="w-full bg-[#3a6186] shadow-lg fixed top-0 left-0 z-50" aria-label="Main navigation">
         <div
             class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-4 md:px-8 lg:px-16 py-4 md:h-[72px]">
             <div class="flex items-center justify-between w-full md:w-auto">
@@ -78,7 +92,7 @@
                             alt="HMIF Logo">
 
                     </a>
-                    <span class="ml-2 text-white font-bold text-xxl md:hidden">HMIF</span>
+                    <span class="ml-2 text-blue-400 font-bold text-4xl md:hidden">HMIF</span>
                     <div id="desktop-menu" class="hidden md:flex flex-row gap-6 lg:gap-8 items-center">
                         <!-- Home Link with Fancy Hover Effect -->
                         <a href="{{ route('home') }}"
@@ -300,108 +314,118 @@
             </div>
     </nav>
 
-    <main class="w-full">
-        @yield('content')
+    <main class="w-full overflow-x-hidden pt-[60px] md:pt-[72px]">
+        <div class="w-full max-w-full overflow-x-hidden">
+            @yield('content')
+        </div>
     </main>
 
 
     <footer class="w-full bg-[#2a2d47] text-white" aria-label="Footer">
-        <div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-12 md:py-20">
-            <div class="flex flex-col md:flex-row gap-12 md:gap-16 items-start justify-between mb-16 md:mb-20">
-                <div class="flex flex-col gap-8 items-start justify-start w-full md:w-[40%]">
-                    <a href="/" class="w-[120px] md:w-[150px] lg:w-[170px] relative">
-                        <img class="w-full h-auto object-contain" src="{{ asset('images/logo_HMIF.png') }}"
+        <!-- Box-border ensures padding is included in width calculation -->
+        <div class="box-border max-w-full mx-auto px-4 md:px-8 lg:px-16 py-8 md:py-12 overflow-x-hidden">
+            <div class="flex flex-col md:flex-row gap-8 md:gap-16 items-start justify-between mb-8 md:mb-12">
+                <!-- HMIF Info Section - Reduced width on mobile -->
+                <div class="flex flex-col gap-6 items-start w-full max-w-[95%] md:w-[35%]">
+                    <div class="flex items-center gap-4">
+                        <img class="w-14 md:w-16 h-auto object-contain" src="{{ asset('images/logo_HMIF.png') }}"
                             alt="HMIF Logo">
-                    </a>
-                    <div class="flex flex-col gap-4 items-start justify-start w-full">
-                        <h3 class="text-[#f4efeb] text-sm font-semibold">Address</h3>
-                        <p class="text-white text-sm leading-[150%] font-normal">Jl. Jendral Soedirman KM. 3 Cilegon
-                            42435 Provinsi Banten
-                        </p>
-                    </div>
-                    <div class="flex flex-col gap-4 items-start justify-start w-full">
-                        <h3 class="text-[#f4efeb] text-sm font-semibold">Contact</h3>
-                        <div class="flex flex-col gap-2">
-                            <a href="mailto:info@hmif.com"
-                                class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] underline">info@hmif.com</a>
+                        <div class="flex flex-col">
+                            <span class="text-blue-400 text-2xl md:text-xl font-bold">HMIF</span>
+                            <span class="text-white text-2xl md:text-sm font-bold uppercase">Untirta</span>
                         </div>
                     </div>
-                    <div class="flex flex-row gap-4 items-start">
-                        <a href="#" class="w-6 h-6 hover:text-[#f4efeb] transition-colors duration-200"
+
+                    <div class="flex flex-col gap-3 items-start">
+                        <h3 class="text-[#f4efeb] text-xs md:text-sm font-semibold">ADDRESS</h3>
+                        <p class="text-white text-xs md:text-sm leading-[150%] max-w-[95%]">
+                            Jl. Jendral Soedirman KM. 3 Cilegon 42435 Provinsi Banten
+                        </p>
+                    </div>
+
+                    <!-- Social Media with flex-wrap -->
+                    <div class="flex flex-wrap gap-2">
+                        <a href="#"
+                            class="w-8 h-8 rounded-full bg-[#136ca9] flex items-center justify-center hover:bg-blue-600 transition"
                             aria-label="Facebook">
-                            <i class="fab fa-facebook-f text-xl"></i>
+                            <i class="fab fa-facebook-f text-sm"></i>
                         </a>
-                        <a href="#" class="w-6 h-6 hover:text-[#f4efeb] transition-colors duration-200"
+                        <a href="#"
+                            class="w-8 h-8 rounded-full bg-[#136ca9] flex items-center justify-center hover:bg-blue-600 transition"
                             aria-label="Twitter">
-                            <i class="fab fa-twitter text-xl"></i>
+                            <i class="fab fa-twitter text-sm"></i>
                         </a>
-                        <a href="#" class="w-6 h-6 hover:text-[#f4efeb] transition-colors duration-200"
+                        <a href="#"
+                            class="w-8 h-8 rounded-full bg-[#136ca9] flex items-center justify-center hover:bg-blue-600 transition"
                             aria-label="Instagram">
-                            <i class="fab fa-instagram text-xl"></i>
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                        <a href="#"
+                            class="w-8 h-8 rounded-full bg-[#136ca9] flex items-center justify-center hover:bg-blue-600 transition"
+                            aria-label="Email">
+                            <i class="fas fa-envelope text-sm"></i>
                         </a>
                     </div>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-6 w-full md:w-[60%]">
-                    <div class="flex flex-col gap-4 items-start justify-start">
+
+                <!-- Navigation & Connect - Reduced width on mobile, smaller gap -->
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-6 w-[95%] md:w-[60%]">
+                    <!-- Navigation Column -->
+                    <div class="flex flex-col gap-2 md:gap-4 items-start justify-start overflow-hidden">
                         <h3 class="text-[#f4efeb] text-sm font-semibold">Navigation</h3>
-                        <a href=""
-                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200">Home</a>
-                        <a href="{{ route('about') }}"
-                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200">About
-                            Us</a>
-                        <a href="#"
-                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 ml-4">Our
-                            Team</a>
-                        <a href="#"
-                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 ml-4">History</a>
-                        <a href="#"
-                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 ml-4">Vision
-                            & Mission</a>
-                        <a href="#"
-                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200">Events</a>
+                        <div class="flex flex-col space-y-2 w-full">
+                            <a href=""
+                                class="text-white text-xs md:text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 truncate">Home</a>
+                            <a href=""
+                                class="text-white text-xs md:text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 truncate">About
+                                Us</a>
+                            <a href="{{ route('team') }}"
+                                class="text-white text-xs md:text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 pl-2 truncate">Our
+                                Team</a>
+                            <a href="#"
+                                class="text-white text-xs md:text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 pl-2 truncate">History</a>
+                            <a href="#"
+                                class="text-white text-xs md:text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 pl-2 truncate">Vision
+                                & Mission</a>
+                            <a href="#"
+                                class="text-white text-xs md:text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 truncate">Events</a>
+                        </div>
                     </div>
-                    <div class="flex flex-col gap-4 items-start justify-start">
+
+                    <!-- Connect Column -->
+                    <div class="flex flex-col gap-2 md:gap-4 items-start justify-start overflow-hidden">
                         <h3 class="text-[#f4efeb] text-sm font-semibold">Connect</h3>
-                        <a href="#"
-                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200">Contact
-                            Us</a>
-                        <a href="#"
-                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200">Join
-                            Us</a>
-                        <a href="#"
-                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200">Member
-                            Login</a>
+                        <div class="flex flex-col space-y-2 w-full">
+                            <a href="#"
+                                class="text-white text-xs md:text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 truncate">Contact
+                                Us</a>
+                            <a href="#"
+                                class="text-white text-xs md:text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 truncate">Join
+                                Us</a>
+                            <a href="#"
+                                class="text-white text-xs md:text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 truncate">Member
+                                Login</a>
+                        </div>
                     </div>
-                    <div class="flex flex-col gap-4 items-start justify-start">
+
+                    <!-- Support Column -->
+                    <div class="flex flex-col gap-2 md:gap-4 items-start justify-start overflow-hidden">
                         <h3 class="text-[#f4efeb] text-sm font-semibold">Support</h3>
-                        <a href="#"
-                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200">FAQs</a>
-                        <a href="#"
-                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200">Support</a>
-                        <a href="#"
-                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200">Feedback</a>
+                        <div class="flex flex-col space-y-2 w-full">
+                            <a href="#"
+                                class="text-white text-xs md:text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 truncate">FAQs</a>
+                            <a href="#"
+                                class="text-white text-xs md:text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 truncate">Support</a>
+                            <a href="#"
+                                class="text-white text-xs md:text-sm leading-[150%] font-normal hover:text-[#f4efeb] transition-colors duration-200 truncate">Feedback</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="w-full">
-                <div class="border-t border-[#136ca9] -mt-px mb-8"></div>
-                <div class="flex flex-col md:flex-row items-center md:items-start md:justify-between gap-4 md:gap-0">
-                    <p class="text-white text-sm leading-[150%] font-normal text-center md:text-left">
-                        &copy;{{ date('Y') }} HMIF.
-                        All rights reserved.</p>
-                    <div
-                        class="flex flex-col md:flex-row gap-4 md:gap-6 items-center md:items-start text-center md:text-left">
-                        <a href="#"
-                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] underline transition-colors duration-200">Privacy
-                            Policy</a>
-                        <a href="#"
-                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] underline transition-colors duration-200">Terms
-                            of Service</a>
-                        <a href="#"
-                            class="text-white text-sm leading-[150%] font-normal hover:text-[#f4efeb] underline transition-colors duration-200">Cookies
-                            Settings</a>
-                    </div>
-                </div>
+
+            <!-- Copyright section -->
+            <div class="text-center text-white text-xs pt-4 border-t border-gray-700">
+                <p>&copy; {{ date('Y') }} HMIF Untirta. All rights reserved.</p>
             </div>
         </div>
     </footer>

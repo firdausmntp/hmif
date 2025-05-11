@@ -44,8 +44,8 @@
         </div>
     @endif
     <div class="w-full relative" aria-labelledby="welcome-heading">
-        <div class="w-full h-[500px] md:h-[500px] lg:h-[1000px] relative overflow-hidden bg-center"
-            style="background-image: url('{{ asset('images/fotohmif.jpg') }}'); background-size: contain;">
+        <div class="w-full relative overflow-hidden">
+            <img src="{{ asset('images/fotohmif.jpg') }}" class="w-full h-auto" alt="HMIF Photo">
         </div>
 
         <div class="absolute inset-0 flex items-center bg-gradient-to-b from-black/70 to-black/70">

@@ -61,7 +61,7 @@
         <div class="max-w-7xl mx-auto px-4 py-12">
             <!-- Header Section -->
             <div class="text-center mb-16">
-                <h1 class="text-4xl font-bold text-[#0077CC] mb-2">HIMAIF 2024</h1>
+                <h1 class="text-4xl font-bold text-[#0077CC] mb-2">HMIF 2024</h1>
                 <div class="w-32 h-1 bg-[#0077CC] mx-auto mb-6 rounded-full"></div>
                 <p class="max-w-3xl mx-auto text-gray-700">Himpunan Mahasiswa Informatika menghadirkan berbagai divisi yang
                     bekerja sama untuk memberikan kontribusi positif bagi mahasiswa jurusan Informatika.</p>

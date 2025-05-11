@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard HMIF</title>
+    <title>@yield('title', 'Dashboard Admin')</title>
     <link rel="icon" href="{{ asset('images/LOGO_HMIF.png') }}" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/admin.js', 'resources/css/admin.css'])
@@ -55,13 +55,15 @@
                 <h6 class="section-title">MENU</h6>
                 <ul class="nav-menu">
                     <li class="nav-item">
-                        <a href="#" class="nav-link active">
+                        <a href="{{ route('admin.dashboard') }}"
+                            class="nav-link {{ request()->is('admin/dashboard') ? 'active' : '' }}">
                             <i class="fas fa-home nav-icon"></i>
                             <span class="nav-text">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('admin.users.index') }}"
+                            class="nav-link {{ request()->is('admin/users*') ? 'active' : '' }}">
                             <i class="fas fa-users nav-icon"></i>
                             <span class="nav-text">Users</span>
                         </a>
@@ -155,9 +157,9 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="bg-white dark:bg-gray-800 px-6 pt-5 pb-4 sm:p-6">
                     <div class="sm:flex sm:items-start">
-
                         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
                             <h3 class="text-xl leading-6 font-bold text-gray-900 dark:text-white">Profil Saya</h3>
                             <div class="mt-6">
@@ -178,69 +180,21 @@
                                 <!-- Tab content: Info -->
                                 <div id="content-info" class="tab-content py-6">
                                     <div class="grid grid-cols-1 gap-6">
-                                        <div>
+                                        <div class="space-y-6">
+                                            <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
+                                                <label
+                                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Nama</label>
+                                                <input type="text" value="{{ auth()->user()->name }}"
+                                                    class="bg-white dark:bg-gray-800 focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-md sm:text-sm border border-gray-300 dark:border-gray-600 p-2.5 text-gray-700 dark:text-gray-200"
+                                                    disabled>
+                                            </div>
 
-
-                                            <div class="space-y-6">
-                                                <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
-                                                    <label
-                                                        class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Nama</label>
-                                                    <div class="flex rounded-md shadow-sm">
-                                                        <div
-                                                            class="flex-shrink-0 inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400">
-                                                            <i class="fas fa-user"></i>
-                                                        </div>
-                                                        <input type="text" value="{{ auth()->user()->name }}"
-                                                            class="bg-white dark:bg-gray-800 focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-r-md sm:text-sm border border-gray-300 dark:border-gray-600 p-2.5 text-gray-700 dark:text-gray-200"
-                                                            disabled>
-                                                    </div>
-                                                    <p class="mt-1.5 text-xs text-gray-500 dark:text-gray-400">Nama
-                                                        tidak dapat diubah.</p>
-                                                </div>
-
-                                                <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
-                                                    <label
-                                                        class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Email</label>
-                                                    <div class="flex rounded-md shadow-sm">
-                                                        <div
-                                                            class="flex-shrink-0 inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400">
-                                                            <i class="fas fa-envelope"></i>
-                                                        </div>
-                                                        <input type="email" value="{{ auth()->user()->email }}"
-                                                            class="bg-white dark:bg-gray-800 focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-r-md sm:text-sm border border-gray-300 dark:border-gray-600 p-2.5 text-gray-700 dark:text-gray-200"
-                                                            disabled>
-                                                    </div>
-                                                    <p class="mt-1.5 text-xs text-gray-500 dark:text-gray-400">Email
-                                                        tidak dapat diubah.</p>
-                                                </div>
-
-                                                <div class="flex space-x-6">
-                                                    <div class="flex-1 bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
-                                                        <label
-                                                            class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Role</label>
-                                                        <div class="mt-1">
-                                                            <div
-                                                                class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-medium px-3 py-1.5 rounded-full inline-flex items-center">
-                                                                <i class="fas fa-user-shield mr-1.5"></i>
-                                                                {{ auth()->user()->hasRole('admin') ? 'Admin' : 'User' }}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="flex-1 bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
-                                                        <label
-                                                            class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Tanggal
-                                                            Bergabung</label>
-                                                        <div class="mt-1">
-                                                            <div
-                                                                class="text-gray-700 dark:text-gray-300 text-sm flex items-center">
-                                                                <i
-                                                                    class="fas fa-calendar-alt mr-2 text-gray-500 dark:text-gray-400"></i>
-                                                                {{ auth()->user()->created_at->format('d M Y') }}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
+                                                <label
+                                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                                                <input type="email" value="{{ auth()->user()->email }}"
+                                                    class="bg-white dark:bg-gray-800 focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-md sm:text-sm border border-gray-300 dark:border-gray-600 p-2.5 text-gray-700 dark:text-gray-200"
+                                                    disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -252,79 +206,63 @@
                                         method="POST">
                                         @csrf
                                         <div class="space-y-6">
+                                            <!-- Username field untuk meningkatkan aksesibilitas -->
+
+                                            <!-- Field untuk Password Saat Ini -->
                                             <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
                                                 <label for="current_password"
                                                     class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Password
                                                     Saat Ini</label>
-                                                <div class="flex rounded-md shadow-sm">
-                                                    <div
-                                                        class="flex-shrink-0 inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400">
-                                                        <i class="fas fa-lock"></i>
-                                                    </div>
-                                                    <input type="password" name="current_password"
-                                                        id="current_password"
-                                                        class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-r-md sm:text-sm border border-gray-300 dark:border-gray-600 p-2.5 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200"
-                                                        required>
-                                                </div>
+                                                <input type="password" name="current_password" id="current_password"
+                                                    class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-md sm:text-sm border border-gray-300 dark:border-gray-600 p-2.5 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200"
+                                                    required autocomplete="current-password">
                                             </div>
 
+                                            <!-- Field untuk Password Baru -->
                                             <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
                                                 <label for="password"
                                                     class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Password
                                                     Baru</label>
-                                                <div class="flex rounded-md shadow-sm">
-                                                    <div
-                                                        class="flex-shrink-0 inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400">
-                                                        <i class="fas fa-key"></i>
-                                                    </div>
-                                                    <input type="password" name="password" id="password"
-                                                        class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-r-md sm:text-sm border border-gray-300 dark:border-gray-600 p-2.5 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200"
-                                                        required>
-                                                </div>
-                                                <div class="mt-2 flex items-center">
-                                                    <i class="fas fa-info-circle text-blue-500 mr-2"></i>
-                                                    <p class="text-xs text-gray-500 dark:text-gray-400">Minimal 8
-                                                        karakter dengan kombinasi huruf dan angka.</p>
-                                                </div>
+                                                <input type="password" name="password" id="password"
+                                                    class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-md sm:text-sm border border-gray-300 dark:border-gray-600 p-2.5 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200"
+                                                    required autocomplete="new-password">
                                             </div>
 
+                                            <!-- Field untuk Konfirmasi Password Baru -->
                                             <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
                                                 <label for="password_confirmation"
                                                     class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Konfirmasi
                                                     Password Baru</label>
-                                                <div class="flex rounded-md shadow-sm">
-                                                    <div
-                                                        class="flex-shrink-0 inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400">
-                                                        <i class="fas fa-check-double"></i>
-                                                    </div>
-                                                    <input type="password" name="password_confirmation"
-                                                        id="password_confirmation"
-                                                        class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-r-md sm:text-sm border border-gray-300 dark:border-gray-600 p-2.5 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200"
-                                                        required>
-                                                </div>
+                                                <input type="password" name="password_confirmation"
+                                                    id="password_confirmation"
+                                                    class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-md sm:text-sm border border-gray-300 dark:border-gray-600 p-2.5 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200"
+                                                    required autocomplete="new-password">
                                             </div>
+
                                         </div>
                                     </form>
                                 </div>
+
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div
-                    class="bg-gray-50 dark:bg-gray-900 px-6 py-4 sm:px-6 sm:flex sm:flex-row-reverse border-t border-gray-200 dark:border-gray-700">
-                    <button type="submit" form="passwordForm" id="savePasswordBtn"
-                        class="w-full inline-flex justify-center items-center px-5 py-2.5 border border-transparent rounded-lg shadow-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm transition-all duration-200">
-                        <i class="fas fa-save mr-2"></i> Simpan Perubahan
-                    </button>
-                    <button id="closeProfileModal" type="button"
-                        class="mt-3 w-full inline-flex justify-center items-center rounded-lg border border-gray-300 dark:border-gray-600 shadow-sm px-5 py-2.5 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:w-auto sm:text-sm transition-all duration-200">
-                        <i class="fas fa-times mr-2"></i> Tutup
-                    </button>
+                    <div
+                        class="bg-gray-50 dark:bg-gray-900 px-6 py-4 sm:px-6 sm:flex sm:flex-row-reverse border-t border-gray-200 dark:border-gray-700">
+                        <button type="submit" form="passwordForm" id="savePasswordBtn"
+                            class="w-full inline-flex justify-center items-center px-5 py-2.5 border border-transparent rounded-lg shadow-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm transition-all duration-200">
+                            <i class="fas fa-save mr-2"></i> Simpan Perubahan
+                        </button>
+                        <button id="closeProfileModal" type="button"
+                            class="mt-3 w-full inline-flex justify-center items-center rounded-lg border border-gray-300 dark:border-gray-600 shadow-sm px-5 py-2.5 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:w-auto sm:text-sm transition-all duration-200">
+                            <i class="fas fa-times mr-2"></i> Tutup
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 </body>
 
 </html>
