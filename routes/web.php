@@ -7,7 +7,10 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\EventController;
+// use App\Http\Controllers\EventController;
+use App\Http\Controllers\Admin\ArtikelController;
+use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\HomeController;
 
 use App\Models\Article;
 
@@ -20,7 +23,12 @@ use App\Models\Article;
 //     return view('welcome', compact('articles'));
 // })->name('home');
 
-Route::get('/', [EventController::class, 'showEvents'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+// Rute untuk artikel
+Route::get('/articles/{id}', [HomeController::class, 'showArticle'])->name('articles.detail');
+
+// Rute untuk filter event di halaman utama
+Route::get('/events/filter', [HomeController::class, 'filterEvents'])->name('events.filter');
 
 
 // Redirect /login ke / dengan flash session untuk menampilkan modal login
@@ -36,6 +44,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('admin.dashboard');
     Route::post('/change-password', [DashboardController::class, 'changePassword'])->middleware('auth')->name('admin.change-password');
     Route::resource('users', UserController::class)->middleware('auth')->names('admin.users');
+    Route::resource('articles', ArtikelController::class)->middleware('auth')->names('admin.articles');
+    Route::resource('events', EventController::class)->middleware('auth')->names('admin.events');
 });
 
 // Rute user
@@ -69,27 +79,27 @@ Route::get('/team', function () {
 
 
 // artikel admin
-use App\Http\Controllers\ArticlesController;
+// use App\Http\Controllers\ArticlesController;
 
-Route::get('/admin/dashboard', [ArticlesController::class, 'index'])->name('admin.dashboard');
-Route::post('/admin/articles', [ArticlesController::class, 'store'])->name('admin.articles.store');
+// Route::get('/admin/dashboard', [ArticlesController::class, 'index'])->name('admin.dashboard');
+// Route::post('/admin/articles', [ArticlesController::class, 'store'])->name('admin.articles.store');
 
-// Route untuk edit artikel
-Route::get('/admin/articles/{article}/edit', [ArticlesController::class, 'edit'])->name('admin.articles.edit'); // Tampilkan form edit artikel
+// // Route untuk edit artikel
+// Route::get('/admin/articles/{article}/edit', [ArticlesController::class, 'edit'])->name('admin.articles.edit'); // Tampilkan form edit artikel
 
-// Route untuk update artikel
-Route::put('/admin/articles/{article}', [ArticlesController::class, 'update'])->name('admin.articles.update'); // Update artikel
+// // Route untuk update artikel
+// Route::put('/admin/articles/{article}', [ArticlesController::class, 'update'])->name('admin.articles.update'); // Update artikel
 
-// Route untuk hapus artikel
-Route::delete('/admin/articles/{article}', [ArticlesController::class, 'destroy'])->name('admin.articles.destroy'); // Hapus artikel
+// // Route untuk hapus artikel
+// Route::delete('/admin/articles/{article}', [ArticlesController::class, 'destroy'])->name('admin.articles.destroy'); // Hapus artikel
 
-// routes/web.php artikel show
-Route::get('/articles/{id}', [ArticlesController::class, 'show'])->name('articles.show');
+// // routes/web.php artikel show
+// Route::get('/articles/{id}', [ArticlesController::class, 'show'])->name('articles.show');
 
-// rute tambahkan event
-// routes/web.php
+// // rute tambahkan event
+// // routes/web.php
 
-Route::post('/admin/events', [EventController::class, 'store'])->name('admin.events.store');
+// Route::post('/admin/events', [EventController::class, 'store'])->name('admin.events.store');
 
-// untuk filter kategori
-Route::get('/events/filter', [EventController::class, 'filter'])->name('events.filter');
+// // untuk filter kategori
+// Route::get('/events/filter', [EventController::class, 'filter'])->name('events.filter');

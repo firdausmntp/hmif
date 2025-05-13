@@ -6,11 +6,11 @@
         <p class="mb-4">Welcome to the improved HMIF Dashboard with a beautiful sidebar!</p>
 
         {{-- Tombol Tambah Artikel --}}
-        <button onclick="document.getElementById('addArticleModal').showModal()"
-            class="bg-blue-500 text-white px-4 py-2 rounded">+ Tambah Artikel</button>
+        {{-- <button onclick="document.getElementById('addArticleModal').showModal()"
+            class="bg-blue-500 text-white px-4 py-2 rounded">+ Tambah Artikel</button> --}}
 
         {{-- Modal Tambah Artikel --}}
-        <dialog id="addArticleModal" class="rounded-lg p-6 w-full max-w-md shadow-xl">
+        {{-- <dialog id="addArticleModal" class="rounded-lg p-6 w-full max-w-md shadow-xl">
             <form method="POST" action="{{ route('admin.articles.store') }}" enctype="multipart/form-data">
                 @csrf
                 <h2 class="text-lg font-semibold mb-4">Tambah Artikel</h2>
@@ -36,14 +36,14 @@
                     <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Simpan</button>
                 </div>
             </form>
-        </dialog>
+        </dialog> --}}
 
         {{-- Tombol Tambah Event --}}
-        <button onclick="document.getElementById('addEventModal').showModal()"
-            class="bg-green-500 text-white px-4 py-2 rounded mt-4">+ Tambah Event</button>
+        {{-- <button onclick="document.getElementById('addEventModal').showModal()"
+            class="bg-green-500 text-white px-4 py-2 rounded mt-4">+ Tambah Event</button> --}}
 
         {{-- Modal Tambah Event --}}
-        <dialog id="addEventModal" class="rounded-lg p-6 w-full max-w-md shadow-xl">
+        {{-- <dialog id="addEventModal" class="rounded-lg p-6 w-full max-w-md shadow-xl">
             <form method="POST" action="{{ route('admin.events.store') }}" enctype="multipart/form-data">
                 @csrf
                 <h2 class="text-lg font-semibold mb-4">Tambah Event</h2>
@@ -78,11 +78,11 @@
                     <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Simpan</button>
                 </div>
             </form>
-        </dialog>
+        </dialog> --}}
 
 
         {{-- Tabel Artikel --}}
-        <div class="mt-6">
+        {{-- <div class="mt-6">
             <h2 class="text-lg font-semibold mb-2">Daftar Artikel</h2>
             <table class="min-w-full border border-gray-300">
                 <thead class="bg-gray-100">
@@ -110,30 +110,30 @@
                             <td class="border px-4 py-2">{{ $article->created_at->format('d M Y') }}</td>
                             <td class="border px-4 py-2 flex gap-2">
                                 {{-- Tombol Edit --}}
-                                <button onclick="openEditModal({{ json_encode($article) }})"
-                                    class="bg-yellow-500 text-white px-4 py-2 rounded">Edit</button>
+        {{-- <button onclick="openEditModal({{ json_encode($article) }})"
+            class="bg-yellow-500 text-white px-4 py-2 rounded">Edit</button> --}}
 
 
-                                {{-- Tombol Hapus --}}
-                                <form action="{{ route('admin.articles.destroy', $article->id) }}" method="POST"
-                                    onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Hapus</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="5" class="text-center px-4 py-2">Belum ada artikel.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
+        {{-- Tombol Hapus --}}
+        {{-- <form action="{{ route('admin.articles.destroy', $article->id) }}" method="POST"
+            onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Hapus</button>
+        </form>
+        </td>
+        </tr>
+        @empty
+            <tr>
+                <td colspan="5" class="text-center px-4 py-2">Belum ada artikel.</td>
+            </tr>
+            @endforelse
+            </tbody>
             </table>
-        </div>
+        </div> --}}
 
         {{-- Tabel Event --}}
-        <div class="mt-10">
+        {{-- <div class="mt-10">
             <h2 class="text-lg font-semibold mb-2">Daftar Event</h2>
             <table class="min-w-full border border-gray-300">
                 <thead class="bg-gray-100">
@@ -170,14 +170,14 @@
             </table>
         </div>
 
-    </div>
+    </div> --}}
 
 
 
 
-    {{-- edit modal --}}
-    {{-- Modal Edit Artikel --}}
-    <dialog id="editArticleModal" class="rounded-lg p-6 w-full max-w-md shadow-xl">
+        {{-- edit modal --}}
+        {{-- Modal Edit Artikel --}}
+        {{-- <dialog id="editArticleModal" class="rounded-lg p-6 w-full max-w-md shadow-xl">
         <form method="POST" action="" id="editArticleForm" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -204,11 +204,11 @@
                 <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Simpan</button>
             </div>
         </form>
-    </dialog>
+    </dialog> --}}
 
 
 
-    <script>
+        {{-- <script>
         function openEditModal(article) {
             // Isi form edit dengan data artikel
             document.getElementById('editTitle').value = article.title;
@@ -218,5 +218,5 @@
             // Tampilkan modal
             document.getElementById('editArticleModal').showModal();
         }
-    </script>
-@endsection
+    </script> --}}
+    @endsection

@@ -120,7 +120,7 @@
     </div>
 
 
-    {{-- Event backend --}}
+    {{-- Event section --}}
     <div class="w-full bg-gray-100" aria-labelledby="upcoming-events-heading">
         <div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-16 md:py-20 lg:py-28">
             <div class="flex flex-col gap-4 items-center justify-start w-full md:w-[768px] mx-auto mb-12 md:mb-20">
@@ -139,19 +139,19 @@
                 <div class="overflow-x-auto flex gap-2 md:gap-4 items-center min-w-max p-1 bg-white rounded-full shadow-sm">
                     <button onclick="filterEvents(null)"
                         class="px-4 py-2 rounded-full text-sm md:text-base font-medium text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 transition-all duration-200">
-                        View All
+                        Semua Event
                     </button>
                     <button onclick="filterEvents('A')"
                         class="px-4 py-2 rounded-full text-sm md:text-base font-medium text-gray-500 hover:text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-500 transition-all duration-200">
-                        Category A
+                        LOMBA
                     </button>
                     <button onclick="filterEvents('B')"
                         class="px-4 py-2 rounded-full text-sm md:text-base font-medium text-gray-500 hover:text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-500 transition-all duration-200">
-                        Category B
+                        WEBINAR
                     </button>
                     <button onclick="filterEvents('C')"
                         class="px-4 py-2 rounded-full text-sm md:text-base font-medium text-gray-500 hover:text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-500 transition-all duration-200">
-                        Category C
+                        MEETUP
                     </button>
                 </div>
             </div>
@@ -166,6 +166,7 @@
     </div>
 
 
+    {{-- Articles section --}}
     <div class="w-full bg-gray-100" aria-labelledby="recent-events-heading">
         <div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-16 md:py-20 lg:py-28">
             <div class="flex flex-col gap-4 items-start justify-start w-full md:w-[768px] mb-12 md:mb-20">
@@ -179,11 +180,20 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {{-- Loop untuk menampilkan artikel --}}
                     @foreach ($articles as $article)
-                        <a href="{{ route('articles.show', $article->id) }}"
+                        <a href="{{ route('articles.detail', $article->id) }}"
                             class="bg-white rounded-2xl shadow-md overflow-hidden transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg block">
                             @if ($article->image)
-                                <img src="{{ asset('storage/' . $article->image) }}" alt="Image"
+                                <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}"
                                     class="w-full h-48 object-cover">
+                            @else
+                                <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+                                    <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                </div>
                             @endif
 
                             <div class="p-6">
@@ -194,9 +204,9 @@
                                 </div>
 
                                 <div class="flex flex-wrap gap-3 text-sm text-gray-500 mb-4">
-                                    <span>{{ $article->created_at->format('d M Y') }}</span>
+                                    <span>{{ \Carbon\Carbon::parse($article->created_at)->format('d M Y') }}</span>
                                     <span>•</span>
-                                    <span>{{ $article->created_at->format('H:i') }}</span>
+                                    <span>{{ \Carbon\Carbon::parse($article->created_at)->format('H:i') }}</span>
                                 </div>
 
                                 <p class="text-gray-600 text-sm md:text-base">
@@ -221,8 +231,8 @@
                 <!-- Testimonial Quote -->
                 <blockquote id="testimonial-heading"
                     class="text-gray-800 text-center text-xl md:text-2xl leading-relaxed font-medium italic">
-                    “HMIF has been instrumental in my growth as a developer. The workshops and networking events have opened
-                    many doors for me.”
+                    "HMIF has been instrumental in my growth as a developer. The workshops and networking events have opened
+                    many doors for me."
                 </blockquote>
 
                 <!-- Author Info -->
@@ -442,6 +452,7 @@
             </div>
         </div>
     </div>
+    </div>
 
 
     {{-- untuk filter --}}
@@ -461,5 +472,48 @@
                     console.error('Error:', err);
                 });
         }
+
+        // Toggle password visibility
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButton = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+
+            if (toggleButton && passwordInput) {
+                toggleButton.addEventListener('click', function() {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+
+                    // Change icon
+                    const iconClass = type === 'password' ? 'fa-eye' : 'fa-eye-slash';
+                    toggleButton.innerHTML = `<i class="fas ${iconClass}"></i>`;
+                });
+            }
+
+            // Show login modal if redirected from login page
+            if (@json(session()->has('show_login_modal'))) {
+                const loginModal = document.getElementById('loginModal');
+                if (loginModal) {
+                    loginModal.classList.remove('hidden');
+                }
+            }
+
+            // Close login modal
+            const closeLoginBtn = document.getElementById('closeLoginModal');
+            if (closeLoginBtn) {
+                closeLoginBtn.addEventListener('click', function() {
+                    document.getElementById('loginModal').classList.add('hidden');
+                });
+            }
+
+            // Close modal when clicking outside
+            const loginModal = document.getElementById('loginModal');
+            if (loginModal) {
+                loginModal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.add('hidden');
+                    }
+                });
+            }
+        });
     </script>
 @endsection

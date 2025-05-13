@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use Illuminate\Support\Facades\Storage;
 
-
-class ArticlesController extends Controller
+class ArtikelController extends Controller
 {
     public function index()
     {
-        $articles = Article::latest()->get();
-        return view('admin.dashboard', compact('articles'));
+        $articles = Article::latest()->paginate(10);
+        return view('admin.artikel', compact('articles'));
     }
 
     public function store(Request $request)
@@ -26,8 +26,9 @@ class ArticlesController extends Controller
         $data = $request->only('title', 'content');
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('articles', 'public');
-            $data['image'] = $imagePath;
+            // Simpan gambar menggunakan Storage
+            $path = $request->file('image')->store('articles', 'public');
+            $data['image'] = $path;
         }
 
         Article::create($data);
@@ -37,8 +38,8 @@ class ArticlesController extends Controller
 
     public function showArticles()
     {
-        $articles = Article::latest()->get();  // Ambil semua artikel terbaru
-        return view('welcome', compact('articles'));  // Kirim data artikel ke view welcome
+        $articles = Article::latest()->get();
+        return view('welcome', compact('articles'));
     }
 
     public function show($id)
@@ -47,8 +48,6 @@ class ArticlesController extends Controller
         return view('user.show', compact('article'));
     }
 
-
-    // untuk edit artikel
     public function edit($id)
     {
         $article = Article::findOrFail($id);
@@ -70,29 +69,30 @@ class ArticlesController extends Controller
         if ($request->hasFile('image')) {
             // Hapus gambar lama jika ada
             if ($article->image) {
-                Storage::delete('public/' . $article->image);
+                Storage::disk('public')->delete($article->image);
             }
-            $imagePath = $request->file('image')->store('articles', 'public');
-            $article->image = $imagePath;
+            
+            // Simpan gambar baru menggunakan Storage
+            $path = $request->file('image')->store('articles', 'public');
+            $article->image = $path;
         }
 
         $article->save();
 
-        return redirect()->route('admin.dashboard')->with('success', 'Artikel berhasil diperbarui!');
+        return redirect()->back()->with('success', 'Artikel berhasil diperbarui!');
     }
 
-    // untuk hapus artikel
     public function destroy($id)
     {
         $article = Article::findOrFail($id);
 
         // Hapus gambar jika ada
         if ($article->image) {
-            Storage::delete('public/' . $article->image);
+            Storage::disk('public')->delete($article->image);
         }
 
         $article->delete();
 
-        return redirect()->route('admin.dashboard')->with('success', 'Artikel berhasil dihapus!');
+        return redirect()->back()->with('success', 'Artikel berhasil dihapus!');
     }
 }

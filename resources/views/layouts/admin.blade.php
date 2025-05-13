@@ -69,13 +69,34 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('admin.events.index') }}"
+                            class="nav-link {{ request()->is('admin/events*') ? 'active' : '' }}">
+                            <i class="fas fa-calendar-alt nav-icon"></i>
+                            <span class="nav-text">Events</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.articles.index') }}"
+                            class="nav-link {{ request()->is('admin/articles*') ? 'active' : '' }}">
+                            <i class="fas fa-newspaper nav-icon"></i>
+                            <span class="nav-text">Articles</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">
+                            <i class="fas fa-calendar nav-icon"></i>
+                            <span class="nav-text">Calendar</span>
+                        </a>
+                    </li>
+                    <h6 class="section-title">SETTINGS</h6>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">
                             <i class="fas fa-cog nav-icon"></i>
                             <span class="nav-text">Settings</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="" class="nav-link">
                             <i class="fas fa-chart-bar nav-icon"></i>
                             <span class="nav-text">Reports</span>
                         </a>
