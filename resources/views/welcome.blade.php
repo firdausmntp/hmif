@@ -34,6 +34,7 @@
             opacity: 0;
         }
     </style>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -155,8 +156,7 @@
                     </button>
                 </div>
             </div>
-
-
+            <livewire:appointments-calendar/>
 
             <div id="event-list" class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-5xl mx-auto">
                 @include('components.event-cards', ['events' => $events])

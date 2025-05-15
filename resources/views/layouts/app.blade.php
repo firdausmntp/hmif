@@ -563,6 +563,8 @@
             });
         });
     </script>
+    @livewireScripts
+    @livewireCalendarScripts
 </body>
 
 </html>
