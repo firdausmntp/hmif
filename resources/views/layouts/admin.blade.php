@@ -69,6 +69,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('admin.aspirasi') }}"
+                            class="nav-link {{ request()->is('admin/aspirasi*') ? 'active' : '' }}">
+                            <i class="fas fa-comment-dots nav-icon"></i>
+                            <span class="nav-text">Aspirasi</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('admin.events.index') }}"
                             class="nav-link {{ request()->is('admin/events*') ? 'active' : '' }}">
                             <i class="fas fa-calendar-alt nav-icon"></i>
@@ -114,7 +121,7 @@
                             © 2025 Himpunan Mahasiswa Informatika
                         </div>
                         <div class="footer-credit">
-                            Made with <i class="fas fa-heart"></i> by RND X INTERNAL
+                            Made with <i class="fas fa-heart"></i> by <a href="">RND</a>
                         </div>
                     </div>
                 </footer>

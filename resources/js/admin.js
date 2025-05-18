@@ -8,6 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let sidebarCollapsed = false;
 
+
+    const adjustContentSpacing = () => {
+        const topbar = document.querySelector('.topbar');
+        if (topbar && mainContent) {
+            const topbarHeight = topbar.offsetHeight;
+            mainContent.style.paddingTop = `${topbarHeight + 4}px`; // Add 16px extra spacing
+        }
+    };
     const toggleSidebar = () => {
         if (window.innerWidth < 768) {
             sidebar.classList.toggle('sidebar-open');
@@ -43,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mainContent?.classList.toggle('main-content-expanded', sidebarCollapsed);
         }
     });
+    adjustContentSpacing();
 
     // ============ Profile Modal & Tabs Logic ============
     const profileModal = document.getElementById('profileModal');
@@ -604,8 +613,166 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
+    const initAspirasiModals = () => {
+        // Show Aspirasi Modal
+        document.querySelectorAll('.show-aspirasi-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const aspirasiId = this.dataset.aspirasiId;
+                const aspirasiName = this.dataset.aspirasiName;
+                const aspirasiContent = this.dataset.aspirasiContent;
+                const aspirasiStatus = this.dataset.aspirasiStatus;
+                const aspirasiResponse = this.dataset.aspirasiResponse;
+                const aspirasiCreated = this.dataset.aspirasiCreated;
+                const aspirasiAdmin = this.dataset.aspirasiAdmin;
+                const aspirasiUpdated = this.dataset.aspirasiUpdated;
+
+                const nameElement = document.getElementById('show-aspirasi-name');
+                const contentElement = document.getElementById('show-aspirasi-content');
+                const createdElement = document.getElementById('show-aspirasi-created');
+                const statusElement = document.getElementById('show-aspirasi-status');
+                const responseSection = document.getElementById('show-response-section');
+                const responseElement = document.getElementById('show-aspirasi-response');
+                const adminElement = document.getElementById('show-aspirasi-admin');
+                const updatedElement = document.getElementById('show-aspirasi-updated');
+
+                if (nameElement) nameElement.textContent = aspirasiName || 'Anonim';
+                if (contentElement) contentElement.textContent = aspirasiContent || '-';
+                if (createdElement) createdElement.textContent = formatDate(aspirasiCreated) || '-';
+
+                // Update status badge
+                if (statusElement) {
+                    let statusClass = '';
+                    let statusText = '';
+
+                    switch (aspirasiStatus) {
+                        case 'pending':
+                            statusClass = 'bg-yellow-100 text-yellow-800';
+                            statusText = 'Menunggu';
+                            break;
+                        case 'resolved':
+                            statusClass = 'bg-green-100 text-green-800';
+                            statusText = 'Direspon';
+                            break;
+                        default:
+                            statusClass = 'bg-gray-100 text-gray-800';
+                            statusText = 'Tidak Diketahui';
+                    }
+
+                    statusElement.innerHTML = `<span class="px-2 py-1 text-xs font-semibold rounded-full ${statusClass}">${statusText}</span>`;
+                }
+
+                // Show/hide response section
+                if (responseSection) {
+                    if (aspirasiStatus === 'resolved' && aspirasiResponse) {
+                        responseSection.classList.remove('hidden');
+                        if (responseElement) responseElement.textContent = aspirasiResponse || '-';
+                        if (adminElement) adminElement.textContent = aspirasiAdmin || 'Admin';
+                        if (updatedElement) updatedElement.textContent = formatDate(aspirasiUpdated) || '-';
+                    } else {
+                        responseSection.classList.add('hidden');
+                    }
+                }
+
+                const modal = document.getElementById('aspirasiShowModal');
+                if (modal) modal.classList.remove('hidden');
+            });
+        });
+
+        // Respond Aspirasi Modal
+        document.querySelectorAll('.respond-aspirasi-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const aspirasiId = this.dataset.aspirasiId;
+                const aspirasiName = this.dataset.aspirasiName;
+                const aspirasiContent = this.dataset.aspirasiContent;
+                const aspirasiStatus = this.dataset.aspirasiStatus;
+                const aspirasiResponse = this.dataset.aspirasiResponse;
+                const aspirasiCreated = this.dataset.aspirasiCreated;
+
+                const idInput = document.getElementById('respond_aspirasi_id');
+                const nameElement = document.getElementById('respond-aspirasi-name');
+                const contentElement = document.getElementById('respond-aspirasi-content');
+                const createdElement = document.getElementById('respond-aspirasi-created');
+                const responseInput = document.getElementById('respond_response');
+                const form = document.getElementById('respondAspirasiForm');
+
+                if (idInput) idInput.value = aspirasiId || '';
+                if (nameElement) nameElement.textContent = aspirasiName || 'Anonim';
+                if (contentElement) contentElement.textContent = aspirasiContent || '-';
+                if (createdElement) createdElement.textContent = formatDate(aspirasiCreated) || '-';
+                if (responseInput) responseInput.value = aspirasiResponse || '';
+                if (form) form.action = `/admin/aspirasi/update/${aspirasiId}`;
+
+                // Set appropriate radio button based on current status
+                const statusRadios = document.querySelectorAll('input[name="status"]');
+                statusRadios.forEach(radio => {
+                    radio.checked = radio.value === aspirasiStatus;
+                });
+
+                const modal = document.getElementById('aspirasiRespondModal');
+                if (modal) modal.classList.remove('hidden');
+            });
+        });
+
+        // Delete Aspirasi Modal
+        document.querySelectorAll('.delete-aspirasi-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const aspirasiId = this.dataset.aspirasiId;
+                const aspirasiName = this.dataset.aspirasiName;
+
+                const idInput = document.getElementById('delete_aspirasi_id');
+                const nameElement = document.getElementById('delete_aspirasi_name');
+                const form = document.getElementById('deleteAspirasiForm');
+
+                if (idInput) idInput.value = aspirasiId || '';
+                if (nameElement) nameElement.textContent = aspirasiName || 'Anonim';
+                if (form) form.action = `/admin/aspirasi/${aspirasiId}`;
+
+                const modal = document.getElementById('aspirasiDeleteModal');
+                if (modal) modal.classList.remove('hidden');
+            });
+        });
+
+        // Close modal when clicking on overlay or close button
+        document.querySelectorAll('#aspirasiShowModal, #aspirasiRespondModal, #aspirasiDeleteModal').forEach(modal => {
+            if (modal) {
+                // Close when clicking outside modal content
+                modal.addEventListener('click', function (e) {
+                    if (e.target === this) {
+                        this.classList.add('hidden');
+                    }
+                });
+
+                // Close when clicking close button
+                const closeBtn = modal.querySelector('button[type="button"]');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', function () {
+                        modal.classList.add('hidden');
+                    });
+                }
+            }
+        });
+
+        // Format date helper function
+        function formatDate(dateString) {
+            if (!dateString) return '';
+
+            try {
+                return new Date(dateString).toLocaleDateString('id-ID', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            } catch (e) {
+                return dateString; // Return original string if parsing fails
+            }
+        }
+    };
+
+    // resize and range nav to main content , can swipe to left and right
+
     // Jalankan setelah semua DOM dimuat
     if (typeof initUserModals === 'function') initUserModals();
     if (typeof initArticleModals === 'function') initArticleModals();
     if (typeof initEventModals === 'function') initEventModals();
+    if (typeof initAspirasiModals === 'function') initAspirasiModals();
 });

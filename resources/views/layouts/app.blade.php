@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HMIF - Himpunan Mahasiswa Informatika</title>
+    <title>
+        @yield('title', 'HMIF - Himpunan Mahasiswa Informatika')
+    </title>
     <link rel="icon" href="{{ asset('images/LOGO_HMIF.png') }}" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -78,6 +80,11 @@
         *::after {
             box-sizing: border-box;
         }
+
+        .nav-link.active {
+            color: #ffffff;
+            background-color: rgba(244, 239, 235, 0.2);
+        }
     </style>
 </head>
 
@@ -90,13 +97,12 @@
                     <a href="/" class="relative">
                         <img class="w-[62px] h-auto object-contain" src="{{ asset('images/LOGO_HMIF.png') }}"
                             alt="HMIF Logo">
-
                     </a>
-                    <span class="ml-2 text-blue-400 font-bold text-4xl md:hidden">HMIF</span>
+                    <span class="ml-2 text-white font-bold text-4xl md:hidden">HMIF</span>
                     <div id="desktop-menu" class="hidden md:flex flex-row gap-6 lg:gap-8 items-center">
-                        <!-- Home Link with Fancy Hover Effect -->
+                        <!-- Home Link -->
                         <a href="{{ route('home') }}"
-                            class="nav-link text-white text-base leading-[150%] font-medium relative group px-2 py-1 overflow-hidden">
+                            class="nav-link text-white text-base leading-[150%] font-medium relative group px-2 py-1 overflow-hidden {{ request()->is('/') ? 'active' : '' }}">
                             <span
                                 class="relative z-10 transition-colors duration-300 group-hover:text-[#2a2d47]">Home</span>
                             <span
@@ -105,47 +111,42 @@
                                 class="absolute inset-0 bg-[#f4efeb] transform origin-top transition-transform duration-300 scale-y-0 group-hover:scale-y-100 -z-0"></span>
                         </a>
 
-                        <!-- About Us Link with Fancy Hover Effect -->
+                        <!-- About Dropdown -->
                         <div class="relative inline-block text-left" id="about-dropdown">
-                            <div>
-                                <button type="button"
-                                    class="nav-link text-white text-base leading-[150%] font-medium relative group px-2 py-1 overflow-hidden flex items-center gap-x-1"
-                                    id="about-menu-button" aria-expanded="false" aria-haspopup="true">
-                                    <span
-                                        class="relative z-10 transition-colors duration-300 group-hover:text-[#2a2d47]">About</span>
-                                    <svg class="w-4 h-4 text-white group-hover:text-[#2a2d47] transition-colors duration-300"
-                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                            d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    <span
-                                        class="nav-highlight absolute bottom-0 left-0 w-full h-[2px] bg-[#f4efeb] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"></span>
-                                    <span
-                                        class="absolute inset-0 bg-[#f4efeb] transform origin-top transition-transform duration-300 scale-y-0 group-hover:scale-y-100 -z-0"></span>
-                                </button>
-                            </div>
-
-                            <!-- Dropdown menu -->
+                            <button type="button"
+                                class="nav-link text-white text-base leading-[150%] font-medium relative group px-2 py-1 overflow-hidden flex items-center gap-x-1 {{ request()->is('team') ? 'active' : '' }}"
+                                id="about-menu-button" aria-expanded="false" aria-haspopup="true">
+                                <span
+                                    class="relative z-10 transition-colors duration-300 group-hover:text-[#2a2d47]">About</span>
+                                <svg class="w-4 h-4 text-white group-hover:text-[#2a2d47] transition-colors duration-300"
+                                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                <span
+                                    class="nav-highlight absolute bottom-0 left-0 w-full h-[2px] bg-[#f4efeb] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"></span>
+                                <span
+                                    class="absolute inset-0 bg-[#f4efeb] transform origin-top transition-transform duration-300 scale-y-0 group-hover:scale-y-100 -z-0"></span>
+                            </button>
                             <div class="hidden absolute z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
                                 role="menu" aria-orientation="vertical" aria-labelledby="about-menu-button"
                                 tabindex="-1" id="about-dropdown-menu">
                                 <div class="py-1" role="none">
-
                                     <a href="{{ route('team') }}"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem"
                                         tabindex="-1">Our Team</a>
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                         role="menuitem" tabindex="-1">History</a>
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                         role="menuitem" tabindex="-1">Vision & Mission</a>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Events Link with Fancy Hover Effect -->
-                        <a href="#"
-                            class="nav-link text-white text-base leading-[150%] font-medium relative group px-2 py-1 overflow-hidden">
+                        <!-- Events Link -->
+                        <a href="{{ route('events.index') }}"
+                            class="nav-link text-white text-base leading-[150%] font-medium relative group px-2 py-1 overflow-hidden {{ request()->is('events*') ? 'active' : '' }}">
                             <span
                                 class="relative z-10 transition-colors duration-300 group-hover:text-[#2a2d47]">Events</span>
                             <span
@@ -154,11 +155,22 @@
                                 class="absolute inset-0 bg-[#f4efeb] transform origin-top transition-transform duration-300 scale-y-0 group-hover:scale-y-100 -z-0"></span>
                         </a>
 
-                        <!-- Forum Link with Fancy Hover Effect -->
-                        <a href="#"
-                            class="nav-link text-white text-base leading-[150%] font-medium relative group px-2 py-1 overflow-hidden">
+                        <!-- Articles Link -->
+                        <a href="{{ route('articles.index') }}"
+                            class="nav-link text-white text-base leading-[150%] font-medium relative group px-2 py-1 overflow-hidden {{ request()->is('articles*') ? 'active' : '' }}">
                             <span
-                                class="relative z-10 transition-colors duration-300 group-hover:text-[#2a2d47]">Forum</span>
+                                class="relative z-10 transition-colors duration-300 group-hover:text-[#2a2d47]">Articles</span>
+                            <span
+                                class="nav-highlight absolute bottom-0 left-0 w-full h-[2px] bg-[#f4efeb] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"></span>
+                            <span
+                                class="absolute inset-0 bg-[#f4efeb] transform origin-top transition-transform duration-300 scale-y-0 group-hover:scale-y-100 -z-0"></span>
+                        </a>
+
+                        <!-- Aspirasi Link -->
+                        <a href="{{ route('aspirasi') }}"
+                            class="nav-link text-white text-base leading-[150%] font-medium relative group px-2 py-1 overflow-hidden {{ request()->is('aspirasi*') ? 'active' : '' }}">
+                            <span
+                                class="relative z-10 transition-colors duration-300 group-hover:text-[#2a2d47]">Aspirasi</span>
                             <span
                                 class="nav-highlight absolute bottom-0 left-0 w-full h-[2px] bg-[#f4efeb] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"></span>
                             <span
@@ -182,29 +194,24 @@
                 </button>
             </div>
 
-            <!-- Mobile Menu - Enhanced with Hover Effects and Consistent Div Structure -->
+            <!-- Mobile Menu -->
             <div id="mobile-menu"
                 class="hidden flex-col gap-4 items-center w-full mt-4 md:hidden transition-all duration-300 ease-in-out overflow-hidden shadow-lg rounded-xl border border-[#2a4d69]/20">
                 <div class="w-full bg-gradient-to-b from-[#3a6186] to-[#2a4d69] backdrop-blur-md p-6 pt-4">
                     <!-- Home -->
-                    <div class="w-full relative mt-2" id="mobile-home-dropdown">
-                        <button
-                            class="w-full text-left py-3 px-4 text-white text-base leading-[150%] font-normal relative overflow-hidden group flex items-center gap-2 rounded-lg border-solid border-[1.5px] border-transparent transition-all duration-300"
-                            id="mobile-home-button">
+                    <div class="w-full relative mt-2">
+                        <a href="{{ route('home') }}"
+                            class="w-full text-left py-3 px-4 text-white text-base leading-[150%] font-normal relative overflow-hidden group flex items-center gap-2 rounded-lg border-solid border-[1.5px] border-transparent transition-all duration-300 {{ request()->is('/') ? 'bg-[#136ca9]/40' : '' }}">
                             <span class="relative z-10 group-hover:text-white">Home</span>
                             <span
                                 class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
-                        </button>
-                        <div class="hidden bg-[#1e3c55] w-full rounded-lg overflow-hidden shadow-inner mt-1"
-                            id="mobile-home-dropdown-menu">
-                            <!-- Kosong untuk saat ini, bisa ditambahkan sub-menu jika perlu -->
-                        </div>
+                        </a>
                     </div>
 
                     <!-- About Dropdown -->
                     <div class="w-full relative mt-2" id="mobile-about-dropdown">
                         <button
-                            class="w-full py-3 px-4 text-white text-base leading-[150%] font-normal relative overflow-hidden group flex items-center gap-1 rounded-lg hover:bg-white/10 transition-all duration-300"
+                            class="w-full py-3 px-4 text-white text-base leading-[150%] font-normal relative overflow-hidden group flex items-center justify-between gap-1 rounded-lg hover:bg-white/10 transition-all duration-300 {{ request()->is('team') ? 'bg-[#136ca9]/40' : '' }}"
                             id="mobile-about-button">
                             <span class="relative z-10">About</span>
                             <svg class="w-4 h-4 text-white transition-transform duration-300" viewBox="0 0 20 20"
@@ -219,19 +226,19 @@
                         <div class="hidden bg-[#1e3c55] w-full rounded-lg overflow-hidden shadow-inner mt-1"
                             id="mobile-about-dropdown-menu">
                             <a href="{{ route('team') }}"
-                                class="w-full text- py-3 px-4 text-white text-sm leading-[150%] font-normal relative overflow-hidden group flex hover:bg-white/10 transition-colors duration-300">
+                                class="block w-full py-3 px-4 text-white text-sm leading-[150%] font-normal relative overflow-hidden group hover:bg-white/10 transition-colors duration-300 {{ request()->is('team') ? 'bg-[#136ca9]/40' : '' }}">
                                 <span class="relative z-10">Our Team</span>
                                 <span
                                     class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
                             </a>
-                            <a href="#"
-                                class="w-full text- py-3 px-4 text-white text-sm leading-[150%] font-normal relative overflow-hidden group flex hover:bg-white/10 transition-colors duration-300">
+                            <a href=""
+                                class="block w-full py-3 px-4 text-white text-sm leading-[150%] font-normal relative overflow-hidden group hover:bg-white/10 transition-colors duration-300">
                                 <span class="relative z-10">History</span>
                                 <span
                                     class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
                             </a>
-                            <a href="#"
-                                class="w-full text- py-3 px-4 text-white text-sm leading-[150%] font-normal relative overflow-hidden group flex hover:bg-white/10 transition-colors duration-300">
+                            <a href=""
+                                class="block w-full py-3 px-4 text-white text-sm leading-[150%] font-normal relative overflow-hidden group hover:bg-white/10 transition-colors duration-300">
                                 <span class="relative z-10">Vision & Mission</span>
                                 <span
                                     class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
@@ -240,33 +247,33 @@
                     </div>
 
                     <!-- Events -->
-                    <div class="w-full relative mt-2" id="mobile-forum-dropdown">
-                        <button
-                            class="w-full text-left py-3 px-4 text-white text-base leading-[150%] font-normal relative overflow-hidden group flex items-center gap-2 rounded-lg border-solid border-[1.5px] border-transparent transition-all duration-300"
-                            id="mobile-forum-button">
+                    <div class="w-full relative mt-2">
+                        <a href="{{ route('events.index') }}"
+                            class="w-full text-left py-3 px-4 text-white text-base leading-[150%] font-normal relative overflow-hidden group flex items-center gap-2 rounded-lg border-solid border-[1.5px] border-transparent transition-all duration-300 {{ request()->is('events*') ? 'bg-[#136ca9]/40' : '' }}">
                             <span class="relative z-10 group-hover:text-white">Events</span>
                             <span
                                 class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
-                        </button>
-                        <div class="hidden bg-[#1e3c55] w-full rounded-lg overflow-hidden shadow-inner mt-1"
-                            id="mobile-forum-dropdown-menu">
-                            <!-- Kosong untuk saat ini, bisa ditambahkan sub-menu jika perlu -->
-                        </div>
+                        </a>
                     </div>
 
-                    <!-- Forum -->
-                    <div class="w-full relative mt-2" id="mobile-forum-dropdown">
-                        <button
-                            class="w-full text-left py-3 px-4 text-white text-base leading-[150%] font-normal relative overflow-hidden group flex items-center gap-2 rounded-lg border-solid border-[1.5px] border-transparent transition-all duration-300"
-                            id="mobile-forum-button">
-                            <span class="relative z-10 group-hover:text-white">Forum</span>
+                    <!-- Articles -->
+                    <div class="w-full relative mt-2">
+                        <a href="{{ route('articles.index') }}"
+                            class="w-full text-left py-3 px-4 text-white text-base leading-[150%] font-normal relative overflow-hidden group flex items-center gap-2 rounded-lg border-solid border-[1.5px] border-transparent transition-all duration-300 {{ request()->is('articles*') ? 'bg-[#136ca9]/40' : '' }}">
+                            <span class="relative z-10 group-hover:text-white">Articles</span>
                             <span
                                 class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
-                        </button>
-                        <div class="hidden bg-[#1e3c55] w-full rounded-lg overflow-hidden shadow-inner mt-1"
-                            id="mobile-forum-dropdown-menu">
-                            <!-- Kosong untuk saat ini, bisa ditambahkan sub-menu jika perlu -->
-                        </div>
+                        </a>
+                    </div>
+
+                    <!-- Aspirasi -->
+                    <div class="w-full relative mt-2">
+                        <a href="{{ route('aspirasi') }}"
+                            class="w-full text-left py-3 px-4 text-white text-base leading-[150%] font-normal relative overflow-hidden group flex items-center gap-2 rounded-lg border-solid border-[1.5px] border-transparent transition-all duration-300 {{ request()->is('aspirasi*') ? 'bg-[#136ca9]/40' : '' }}">
+                            <span class="relative z-10 group-hover:text-white">Aspirasi</span>
+                            <span
+                                class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100 -z-0"></span>
+                        </a>
                     </div>
 
                     <!-- Login Button -->
@@ -290,7 +297,7 @@
                 </div>
             </div>
 
-            <!-- Login Button with Advanced Hover Effect (Desktop) -->
+            <!-- Desktop Login Button -->
             <div class="hidden md:flex flex-row gap-4 items-center">
                 @auth
                     <a href="{{ auth()->user()->role == 'admin' ? route('admin.dashboard') : route('dashboard') }}"
@@ -299,7 +306,7 @@
                         <span
                             class="absolute inset-0 bg-[#136ca9] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"></span>
                         <span
-                            class="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-gradient-to-r from-transparent via-white to-transparent blur-sm"></span>
+                            class="absolute -inset-x-2 -inset-y-2 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-gradient-to-r from-transparent via-white to-transparent blur-sm"></span>
                     </a>
                 @else
                     <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal"
@@ -312,7 +319,10 @@
                     </a>
                 @endauth
             </div>
+        </div>
     </nav>
+
+
 
     <main class="w-full overflow-x-hidden pt-[60px] md:pt-[72px]">
         <div class="w-full max-w-full overflow-x-hidden">
@@ -430,139 +440,97 @@
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Fungsi untuk menangani mobile menu
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center w-full h-full">
+            <div class="bg-white rounded-2xl shadow-xl w-full max-w-md mx-4 overflow-hidden transform transition-all">
+                <!-- Close button -->
+                <div class="absolute top-4 right-4">
+                    <button id="closeLoginModal" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
 
-            mobileMenuButton.addEventListener('click', function() {
-                const isExpanded = mobileMenu.classList.toggle('hidden');
-                mobileMenu.classList.toggle('flex', !isExpanded);
-                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
-            });
+                <!-- Modal content -->
+                <div class="px-8 pt-8 pb-10">
+                    <!-- Logo centered -->
+                    <div class="flex justify-center mb-8">
+                        <img class="w-24 h-auto object-contain" src="{{ asset('images/LOGO_HMIF.png') }}"
+                            alt="HMIF Logo">
+                    </div>
 
-            // About dropdown functionality
-            const aboutButton = document.getElementById('about-menu-button');
-            const aboutDropdownMenu = document.getElementById('about-dropdown-menu');
+                    <!-- Modal title -->
+                    <h2 class="text-2xl font-bold text-center text-[#2a2d47] mb-6">Sign In to HMIF</h2>
 
-            if (aboutButton && aboutDropdownMenu) {
-                // Toggle dropdown when button is clicked
-                aboutButton.addEventListener('click', function() {
-                    const isExpanded = aboutDropdownMenu.classList.contains('hidden');
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
 
-                    // Toggle the dropdown visibility
-                    aboutDropdownMenu.classList.toggle('hidden', !isExpanded);
+                        <!-- Show error message if exists -->
+                        @if ($errors->has('login_error'))
+                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                                <span>{{ $errors->first('login_error') }}</span>
+                            </div>
+                        @endif
+                        <!-- Email input -->
+                        <div class="mb-5">
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email
+                                Address</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-envelope text-gray-400"></i>
+                                </div>
+                                <input type="email" id="email" name="email"
+                                    class="pl-10 block w-full rounded-lg border @error('email') border-red-500 @enderror py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#136ca9] focus:border-transparent transition duration-150"
+                                    placeholder="your@email.com" value="{{ old('email') }}" required>
+                            </div>
+                            @error('email')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
 
-                    // Add animation classes
-                    if (isExpanded) {
-                        aboutDropdownMenu.classList.add('transition', 'ease-out', 'duration-100',
-                            'transform', 'opacity-100', 'scale-100');
-                        aboutDropdownMenu.classList.remove('opacity-0', 'scale-95');
-                    } else {
-                        aboutDropdownMenu.classList.add('transition', 'ease-in', 'duration-75', 'transform',
-                            'opacity-0', 'scale-95');
-                        aboutDropdownMenu.classList.remove('opacity-100', 'scale-100');
-                    }
+                        <!-- Password input -->
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-1">
+                                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
 
-                    aboutButton.setAttribute('aria-expanded', isExpanded);
-                });
+                            </div>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-lock text-gray-400"></i>
+                                </div>
+                                <input type="password" id="password" name="password"
+                                    class="pl-10 block w-full rounded-lg border border-gray-300 py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#136ca9] focus:border-transparent transition duration-150"
+                                    placeholder="••••••••" required>
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <button type="button" id="togglePassword"
+                                        class="text-gray-400 hover:text-gray-600 focus:outline-none">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 
-                // Close dropdown when clicking outside
-                document.addEventListener('click', function(event) {
-                    if (!aboutButton.contains(event.target) && !aboutDropdownMenu.contains(event.target)) {
-                        aboutDropdownMenu.classList.add('hidden');
-                        aboutButton.setAttribute('aria-expanded', 'false');
-                    }
-                });
-            }
+                        <!-- Remember me checkbox -->
+                        <div class="flex items-center mb-6">
+                            <input type="checkbox" id="remember" name="remember"
+                                class="h-4 w-4 text-[#136ca9] focus:ring-[#136ca9] border-gray-300 rounded">
+                            <label for="remember" class="ml-2 block text-sm text-gray-700">Remember me</label>
+                        </div>
 
-            // Mobile About dropdown functionality
-            const mobileAboutButton = document.getElementById('mobile-about-button');
-            const mobileAboutDropdownMenu = document.getElementById('mobile-about-dropdown-menu');
+                        <!-- Submit button -->
+                        <button type="submit"
+                            class="w-full bg-[#2a2d47] text-white py-3 px-4 rounded-lg font-medium hover:bg-[#136ca9] focus:outline-none focus:ring-2 focus:ring-[#136ca9] focus:ring-opacity-50 transition duration-150 shadow-md flex items-center justify-center">
+                            <span>Sign In</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </form>
 
-            if (mobileAboutButton && mobileAboutDropdownMenu) {
-                mobileAboutButton.addEventListener('click', function() {
-                    mobileAboutDropdownMenu.classList.toggle('hidden');
-                });
-            }
+                </div>
+            </div>
+        </div>
+    </div>
 
-            // Tambahkan kode untuk menangani modal login
-            const loginModal = document.getElementById('loginModal');
-            const loginButtons = document.querySelectorAll('[data-bs-target="#loginModal"]');
-            const closeLoginModal = document.getElementById('closeLoginModal');
-            const togglePasswordButton = document.getElementById('togglePassword');
-            const passwordInput = document.getElementById('password');
-
-            // Buka modal ketika tombol login diklik
-            loginButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    loginModal.classList.remove('hidden');
-                    document.body.style.overflow = 'hidden'; // Mencegah scrolling
-                });
-            });
-
-            // Tutup modal ketika tombol close diklik
-            if (closeLoginModal) {
-                closeLoginModal.addEventListener('click', function() {
-                    loginModal.classList.add('hidden');
-                    document.body.style.overflow = ''; // Aktifkan scrolling kembali
-                });
-            }
-
-            // Tutup modal ketika klik di luar konten modal
-            window.addEventListener('click', function(e) {
-                if (e.target === loginModal) {
-                    loginModal.classList.add('hidden');
-                    document.body.style.overflow = '';
-                }
-            });
-
-            // Toggle password visibility
-            if (togglePasswordButton && passwordInput) {
-                togglePasswordButton.addEventListener('click', function() {
-                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                    passwordInput.setAttribute('type', type);
-
-                    // Ubah ikon mata
-                    const icon = togglePasswordButton.querySelector('i');
-                    if (type === 'password') {
-                        icon.classList.remove('fa-eye-slash');
-                        icon.classList.add('fa-eye');
-                    } else {
-                        icon.classList.remove('fa-eye');
-                        icon.classList.add('fa-eye-slash');
-                    }
-                });
-            }
-
-            @if (Session::has('show_login_modal') || $errors->has('login_error') || $errors->has('email'))
-                document.getElementById('loginModal').classList.remove('hidden');
-            @endif
-
-            // Setup close button functionality
-            document.getElementById('closeLoginModal').addEventListener('click', function() {
-                document.getElementById('loginModal').classList.add('hidden');
-            });
-
-            // Setup toggle password visibility
-            document.getElementById('togglePassword').addEventListener('click', function() {
-                const passwordInput = document.getElementById('password');
-                const icon = this.querySelector('i');
-
-                if (passwordInput.type === 'password') {
-                    passwordInput.type = 'text';
-                    icon.classList.remove('fa-eye');
-                    icon.classList.add('fa-eye-slash');
-                } else {
-                    passwordInput.type = 'password';
-                    icon.classList.remove('fa-eye-slash');
-                    icon.classList.add('fa-eye');
-                }
-            });
-        });
-    </script>
+    <script></script>
     @livewireScripts
     @livewireCalendarScripts
 </body>

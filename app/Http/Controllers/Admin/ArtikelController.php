@@ -42,12 +42,6 @@ class ArtikelController extends Controller
         return view('welcome', compact('articles'));
     }
 
-    public function show($id)
-    {
-        $article = Article::findOrFail($id);
-        return view('user.show', compact('article'));
-    }
-
     public function edit($id)
     {
         $article = Article::findOrFail($id);

@@ -24,6 +24,53 @@
             }
         }
 
+        @keyframes slide-in-down {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slide-in-up {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .animate-slide-in-down {
+            animation: slide-in-down 0.8s ease-out forwards;
+        }
+
+        .animate-slide-in-up {
+            animation: slide-in-up 0.8s ease-out forwards;
+            animation-delay: 0.2s;
+        }
+
+        .animate-fade-in {
+            animation: fade-in 1s ease-out forwards;
+        }
+
         .animate-fade-in-up {
             animation: fade-in-up 0.6s ease-out forwards;
         }
@@ -32,6 +79,95 @@
             animation: fade-in 0.8s ease-out forwards;
             animation-delay: 0.2s;
             opacity: 0;
+        }
+
+        /* Responsive fixes */
+        @media (max-width: 640px) {
+
+            /* Small device styles */
+            .hero-container {
+                min-height: 400px;
+            }
+
+            .hero-text {
+                padding: 1rem;
+                margin-top: -2rem;
+            }
+
+            /* Fix buttons spacing */
+            .hero-buttons {
+                flex-direction: column;
+                gap: 0.75rem;
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            /* Make cards more readable on mobile */
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Hero image container needs minimum height */
+        .hero-image-container {
+            min-height: 450px;
+            position: relative;
+        }
+
+        /* Fix for text over image */
+        .text-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            z-index: 10;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.75));
+        }
+
+        @media (max-width: 568px) {
+
+            /* Make the hero container bigger */
+            .w-full.relative[aria-labelledby="welcome-heading"] {
+                min-height: 100vh;
+            }
+
+            /* Set the image to fit within container without cropping */
+            .w-full.relative[aria-labelledby="welcome-heading"] img {
+                object-fit: contain !important;
+                /* Forces image to show completely */
+                object-position: center !important;
+                /* Centers the image */
+                max-height: 100vh;
+                padding: 0 !important;
+            }
+
+            /* Darker overlay for readability since image is smaller */
+            .absolute.inset-0.flex.items-center {
+                background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)) !important;
+            }
+
+            .w-full.relative[aria-labelledby="welcome-heading"] img {
+                object-position: center center !important;
+                /* Focus on center where people usually are */
+            }
+
+            .hero-section>div {
+                min-height: 100vh;
+                /* Increase height for mobile to allow more repeat */
+            }
+
+            .hero-section .bg-contain {
+                background-size: contain;
+                /* Ensure image fits width */
+                background-position: top center;
+            }
+        }
+
+        .absolute.inset-0.flex.items-center.justify-center.bg-gradient-to-b {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85));
         }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
@@ -44,57 +180,29 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
+    <!-- Hero Section Without Buttons -->
     <div class="w-full relative" aria-labelledby="welcome-heading">
-        <div class="w-full relative overflow-hidden">
-            <img src="{{ asset('images/fotohmif.jpg') }}" class="w-full h-auto" alt="HMIF Photo">
+        <div class="w-full relative overflow-hidden" style="min-height: 85vh;">
+            <img src="{{ asset('images/fotohmif.jpg') }}"
+                class="w-full h-full object-contain md:object-cover absolute inset-0 bg-repeat-y" alt="HMIF Photo">
         </div>
 
-        <div class="absolute inset-0 flex items-center bg-gradient-to-b from-black/70 to-black/70">
-            <div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 w-full">
-                <div class="flex flex-col gap-6 md:gap-8 items-start justify-center w-full md:w-[60%] lg:w-[560px]">
-                    <div class="flex flex-col gap-4 md:gap-6 items-start justify-start w-full">
-                        <div class="overflow-hidden">
-                            <h1 id="welcome-heading"
-                                class="text-white text-4xl md:text-5xl lg:text-[60px] leading-[1.1] tracking-tight font-bold animate-fade-in-up"
-                                style="text-shadow: 0px 2px 4px rgba(0,0,0,0.3); letter-spacing: -0.02em;">
-                                Welcome to <span
-                                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-blue-500">HMIF</span>
-                            </h1>
-                        </div>
-                        <p class="text-white text-base md:text-lg lg:text-xl leading-[1.7] font-normal max-w-xl animate-fade-in bg-black/30 p-4 md:p-5 rounded-lg border-l-4 border-blue-300 shadow-lg"
-                            style="text-shadow: 0px 1px 3px rgba(0,0,0,0.3); letter-spacing: 0.01em;">
-                            <span class="text-blue-200 font-medium">Himpunan Mahasiswa Informatika (HMIF)</span> is a
-                            student organization that brings together students
-                            from the Informatics study program. We organize <span class="text-gray-200 italic">various
-                                activities</span> to enhance knowledge, skills,
-                            and networking opportunities.
-                        </p>
-                    </div>
-                    <div class="flex flex-row gap-4 items-start animate-fade-in-up" style="animation-delay: 0.3s;">
-                        @guest
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal"
-                                class="group relative overflow-hidden flex flex-row gap-2 items-center justify-center px-5 md:px-7 py-2.5 md:py-3 rounded-full border-solid border-2 border-[#f4efeb] bg-[#f4efeb] text-[#2a2d47] text-sm md:text-base font-semibold hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl">
-                                <span class="relative z-10">Join Us</span>
-                                <span
-                                    class="absolute inset-0 bg-gradient-to-r from-[#136ca9] to-[#0a4c7a] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-                            </a>
-                        @else
-                            <a href="{{ route('dashboard') }}"
-                                class="group relative overflow-hidden flex flex-row gap-2 items-center justify-center px-5 md:px-7 py-2.5 md:py-3 rounded-full border-solid border-2 border-[#f4efeb] bg-[#f4efeb] text-[#2a2d47] text-sm md:text-base font-semibold hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl">
-                                <span class="relative z-10">Go to Dashboard</span>
-                                <span
-                                    class="absolute inset-0 bg-gradient-to-r from-[#136ca9] to-[#0a4c7a] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-                            </a>
-                        @endguest
-                        <a href="#about"
-                            class="group relative overflow-hidden flex flex-row gap-2 items-center justify-center px-5 md:px-7 py-2.5 md:py-3 rounded-full border-solid border-2 border-white bg-transparent backdrop-blur-sm text-white text-sm md:text-base font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
-                            <span class="relative z-10 group-hover:text-[#2a2d47] transition-colors duration-300">Learn
-                                More</span>
+        <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-black/75 to-black/85">
+            <div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 w-full text-center py-16">
+                <div class="flex flex-col gap-6 items-center justify-center w-full">
+                    <div class="overflow-hidden">
+                        <h1 id="welcome-heading"
+                            class="text-white text-4xl md:text-5xl lg:text-7xl leading-tight tracking-tight font-extrabold animate-slide-in-down"
+                            style="text-shadow: 0px 4px 8px rgba(0,0,0,0.5); letter-spacing: -0.03em;">
                             <span
-                                class="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-                            <span class="absolute top-0 left-0 w-full h-full bg-[#2a2d47] rounded-full z-0"></span>
-                        </a>
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-300 to-blue-500">HMIF
+                                2025</span>
+                        </h1>
                     </div>
+                    <p class="text-white text-lg md:text-xl lg:text-3xl leading-snug font-semibold animate-slide-in-up bg-black/50 p-4 md:p-6 rounded-xl border-t-4 border-blue-400 shadow-2xl max-w-lg mx-auto"
+                        style="text-shadow: 0px 2px 4px rgba(0,0,0,0.4); letter-spacing: 0.02em;">
+                        <span class="text-blue-200 italic">KABINET ANVESANA</span>
+                    </p>
                 </div>
             </div>
         </div>
@@ -137,31 +245,37 @@
 
             <!-- Filter Buttons -->
             <div class="flex justify-center mb-10">
-                <div class="overflow-x-auto flex gap-2 md:gap-4 items-center min-w-max p-1 bg-white rounded-full shadow-sm">
-                    <button onclick="filterEvents(null)"
-                        class="px-4 py-2 rounded-full text-sm md:text-base font-medium text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 transition-all duration-200">
-                        Semua Event
-                    </button>
-                    <button onclick="filterEvents('A')"
-                        class="px-4 py-2 rounded-full text-sm md:text-base font-medium text-gray-500 hover:text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-500 transition-all duration-200">
-                        LOMBA
-                    </button>
-                    <button onclick="filterEvents('B')"
-                        class="px-4 py-2 rounded-full text-sm md:text-base font-medium text-gray-500 hover:text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-500 transition-all duration-200">
-                        WEBINAR
-                    </button>
-                    <button onclick="filterEvents('C')"
-                        class="px-4 py-2 rounded-full text-sm md:text-base font-medium text-gray-500 hover:text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-500 transition-all duration-200">
-                        MEETUP
-                    </button>
+                <div class="overflow-x-auto w-full max-w-md mx-auto">
+                    <div class="flex flex-wrap justify-center gap-2 p-2 bg-white rounded-full shadow-sm">
+                        <button onclick="filterEvents(null)"
+                            class="px-3 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 transition-all duration-200">
+                            Semua Event
+                        </button>
+                        <button onclick="filterEvents('A')"
+                            class="px-3 py-2 rounded-full text-sm font-medium text-gray-500 hover:text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-500 transition-all duration-200">
+                            LOMBA
+                        </button>
+                        <button onclick="filterEvents('B')"
+                            class="px-3 py-2 rounded-full text-sm font-medium text-gray-500 hover:text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-500 transition-all duration-200">
+                            WEBINAR
+                        </button>
+                        <button onclick="filterEvents('C')"
+                            class="px-3 py-2 rounded-full text-sm font-medium text-gray-500 hover:text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-500 transition-all duration-200">
+                            MEETUP
+                        </button>
+                    </div>
                 </div>
             </div>
-            <livewire:appointments-calendar/>
 
-            <div id="event-list" class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-5xl mx-auto">
+
+            <!-- Improved Event Grid -->
+            <div id="event-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-5xl mx-auto px-4">
                 @include('components.event-cards', ['events' => $events])
             </div>
 
+        </div>
+        <div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-16 md:py-20 lg:py-28">
+            <livewire:appointments-calendar />
         </div>
     </div>
 
@@ -363,96 +477,8 @@
         </div>
     </div>
 
-    <!-- Login Modal -->
-    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
-        <div class="flex items-center justify-center w-full h-full">
-            <div class="bg-white rounded-2xl shadow-xl w-full max-w-md mx-4 overflow-hidden transform transition-all">
-                <!-- Close button -->
-                <div class="absolute top-4 right-4">
-                    <button id="closeLoginModal" class="text-gray-500 hover:text-gray-700 focus:outline-none">
-                        <i class="fas fa-times text-xl"></i>
-                    </button>
-                </div>
 
-                <!-- Modal content -->
-                <div class="px-8 pt-8 pb-10">
-                    <!-- Logo centered -->
-                    <div class="flex justify-center mb-8">
-                        <img class="w-24 h-auto object-contain" src="{{ asset('images/LOGO_HMIF.png') }}"
-                            alt="HMIF Logo">
-                    </div>
 
-                    <!-- Modal title -->
-                    <h2 class="text-2xl font-bold text-center text-[#2a2d47] mb-6">Sign In to HMIF</h2>
-
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <!-- Show error message if exists -->
-                        @if ($errors->has('login_error'))
-                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                                <span>{{ $errors->first('login_error') }}</span>
-                            </div>
-                        @endif
-                        <!-- Email input -->
-                        <div class="mb-5">
-                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email
-                                Address</label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <i class="fas fa-envelope text-gray-400"></i>
-                                </div>
-                                <input type="email" id="email" name="email"
-                                    class="pl-10 block w-full rounded-lg border @error('email') border-red-500 @enderror py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#136ca9] focus:border-transparent transition duration-150"
-                                    placeholder="your@email.com" value="{{ old('email') }}" required>
-                            </div>
-                            @error('email')
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <!-- Password input -->
-                        <div class="mb-6">
-                            <div class="flex items-center justify-between mb-1">
-                                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-
-                            </div>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <i class="fas fa-lock text-gray-400"></i>
-                                </div>
-                                <input type="password" id="password" name="password"
-                                    class="pl-10 block w-full rounded-lg border border-gray-300 py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#136ca9] focus:border-transparent transition duration-150"
-                                    placeholder="••••••••" required>
-                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
-                                    <button type="button" id="togglePassword"
-                                        class="text-gray-400 hover:text-gray-600 focus:outline-none">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Remember me checkbox -->
-                        <div class="flex items-center mb-6">
-                            <input type="checkbox" id="remember" name="remember"
-                                class="h-4 w-4 text-[#136ca9] focus:ring-[#136ca9] border-gray-300 rounded">
-                            <label for="remember" class="ml-2 block text-sm text-gray-700">Remember me</label>
-                        </div>
-
-                        <!-- Submit button -->
-                        <button type="submit"
-                            class="w-full bg-[#2a2d47] text-white py-3 px-4 rounded-lg font-medium hover:bg-[#136ca9] focus:outline-none focus:ring-2 focus:ring-[#136ca9] focus:ring-opacity-50 transition duration-150 shadow-md flex items-center justify-center">
-                            <span>Sign In</span>
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </button>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
 
 
     {{-- untuk filter --}}

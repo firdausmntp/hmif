@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UserController;
 // use App\Http\Controllers\EventController;
 use App\Http\Controllers\Admin\ArtikelController;
 use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\Admin\AspirasiController;
 use App\Http\Controllers\HomeController;
 
 use App\Models\Article;
@@ -26,10 +27,15 @@ use App\Models\Article;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 // Rute untuk artikel
 Route::get('/articles/{id}', [HomeController::class, 'showArticle'])->name('articles.detail');
-
-// Rute untuk filter event di halaman utama
+Route::get('/articles', [HomeController::class, 'articleIndex'])->name('articles.index');
 Route::get('/events/filter', [HomeController::class, 'filterEvents'])->name('events.filter');
+Route::get('/events', [HomeController::class, 'events'])->name('events.index');
+Route::get('/events/{event}', [HomeController::class, 'eventDetail'])->name('events.detail');
 
+Route::get('/aspirasi', [HomeController::class, 'aspirasi'])->name('aspirasi');
+Route::post('/aspirasi', [HomeController::class, 'storeAspirasi'])->name('aspirasi.store');
+Route::get('/aspirasi/{id}/detail', [HomeController::class, 'detailAspirasi'])->name('aspirasi.detail');
+Route::get('/reload-captcha', [HomeController::class, 'reloadCaptcha'])->name('reload.captcha');
 
 // Redirect /login ke / dengan flash session untuk menampilkan modal login
 Route::get('/login', function () {
@@ -46,6 +52,11 @@ Route::prefix('admin')->group(function () {
     Route::resource('users', UserController::class)->middleware('auth')->names('admin.users');
     Route::resource('articles', ArtikelController::class)->middleware('auth')->names('admin.articles');
     Route::resource('events', EventController::class)->middleware('auth')->names('admin.events');
+
+    // aspirasi
+    Route::get('/aspirasi', [AspirasiController::class, 'index'])->middleware('auth')->name('admin.aspirasi');
+    Route::post('/aspirasi/update/{aspirasi}', [AspirasiController::class, 'updateAspirasi'])->middleware('auth')->name('admin.aspirasi.update');
+    Route::delete('/aspirasi/{aspirasi}', [AspirasiController::class, 'destroy'])->name('admin.aspirasi.destroy');
 });
 
 // Rute user
