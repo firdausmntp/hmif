@@ -272,10 +272,9 @@
             <div id="event-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-5xl mx-auto px-4">
                 @include('components.event-cards', ['events' => $events])
             </div>
-
-        </div>
-        <div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-16 md:py-20 lg:py-28">
-            <livewire:appointments-calendar />
+            <div class="mb-16"> {{-- Tambah margin-bottom besar --}}
+                <x-full-calendar :events="$calendarEvents" />
+            </div>
         </div>
     </div>
 

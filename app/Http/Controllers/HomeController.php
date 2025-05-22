@@ -24,8 +24,19 @@ class HomeController extends Controller
             ->orderBy('event_date', 'asc')
             ->take(4)
             ->get();
-            
-        return view('welcome', compact('articles', 'events'));
+        
+        $calendarEvents = $events->map(function($event) {
+    return [
+        'title' => $event->title,
+        'start' => $event->event_date,
+        'end' => $event->event_date,
+        'extendedProps' => [
+            'status' => $event->status,
+            'location' => $event->location,
+        ],
+        ];
+    });    
+        return view('welcome', compact('articles', 'events', 'calendarEvents'));
     }
     
     /**

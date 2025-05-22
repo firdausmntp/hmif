@@ -86,6 +86,7 @@
             background-color: rgba(244, 239, 235, 0.2);
         }
     </style>
+    @stack('styles')
 </head>
 
 <body class="min-h-screen w-full bg-gray-100">
@@ -531,8 +532,7 @@
     </div>
 
     <script></script>
-    @livewireScripts
-    @livewireCalendarScripts
+    @stack('scripts')
 </body>
 
 </html>
