@@ -19,23 +19,25 @@ class HomeController extends Controller
         // Ambil 6 artikel terbaru
         $articles = Article::latest()->take(6)->get();
         
-        // Ambil event yang akan datang (upcoming) dan sedang berlangsung (ongoing)
+        // Ambil event yang akan datang (upcoming) dan sedang berlangsung (ongoing) untuk grid
         $events = Event::whereIn('status', ['upcoming', 'ongoing'])
             ->orderBy('event_date', 'asc')
             ->take(4)
             ->get();
-        
-        $calendarEvents = $events->map(function($event) {
-    return [
-        'title' => $event->title,
-        'start' => $event->event_date,
-        'end' => $event->event_date,
-        'extendedProps' => [
-            'status' => $event->status,
-            'location' => $event->location,
-        ],
-        ];
-    });    
+
+        // Ambil SEMUA event untuk kalender (bisa filter status jika mau)
+        $calendarEvents = Event::orderBy('event_date', 'asc')->get()->map(function($event) {
+            return [
+                'title' => $event->title,
+                'start' => $event->event_date,
+                'end' => $event->event_date,
+                'extendedProps' => [
+                    'status' => $event->status,
+                    'location' => $event->location,
+                ],
+            ];
+        });
+
         return view('welcome', compact('articles', 'events', 'calendarEvents'));
     }
     

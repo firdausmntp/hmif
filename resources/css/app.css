@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.full-calendar-container {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px 0 rgba(30, 41, 59, 0.10);
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    overflow-x: auto;
+}
+.fc-toolbar-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2563eb;
+    letter-spacing: -0.01em;
+}
+.fc-button {
+    background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.4rem 1.2rem;
+    font-weight: 600;
+    transition: background 0.2s;
+    box-shadow: 0 2px 8px 0 rgba(59, 130, 246, 0.08);
+}
+.fc-button:hover, .fc-button:focus {
+    background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%);
+    color: #fff;
+}
+.fc-daygrid-event {
+    background: linear-gradient(90deg, #87abf8 0%, #1d6ff3 100%);
+    color: #1e293b;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.2rem 0.5rem;
+    margin-bottom: 0.2rem;
+    box-shadow: 0 1px 4px 0 rgba(59, 130, 246, 0.06);
+    transition: box-shadow 0.2s;
+}
+.fc-day-today {
+    background: #dbeafe !important;
+}
